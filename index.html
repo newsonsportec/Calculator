@@ -33,22 +33,22 @@
     }
 
     /*
-      LARGE calculator position.
-      This version is about x1.5 larger visually.
+      Calculator position on your poster.
+      Change top if you need to move it lower or higher.
     */
     .calculator-area {
       position: absolute;
-      left: 4.5%;
-      top: 37.2%;
-      width: 68.5%;
-      height: 52.5%;
+      left: 7.7%;
+      top: 39.2%;
+      width: 60.8%;
+      height: 45.2%;
       background: #ffffff;
-      border: 5px solid #f2f2f2;
-      border-radius: 30px;
-      padding: 13px;
+      border: 4px solid #f2f2f2;
+      border-radius: 26px;
+      padding: 10px;
       box-shadow:
-        0 14px 34px rgba(0, 0, 0, 0.55),
-        inset 0 0 0 1px rgba(255, 255, 255, 0.95);
+        0 12px 30px rgba(0, 0, 0, 0.48),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.9);
       z-index: 5;
     }
 
@@ -56,39 +56,39 @@
       width: 100%;
       height: 100%;
       background: linear-gradient(180deg, #24272f 0%, #111318 100%);
-      border-radius: 23px;
-      padding: 16px;
+      border-radius: 20px;
+      padding: 13px;
       color: #ffffff;
       display: flex;
       flex-direction: column;
-      gap: 11px;
+      gap: 9px;
       overflow: hidden;
       box-shadow:
-        inset 0 0 20px rgba(255, 255, 255, 0.04),
-        0 7px 18px rgba(0, 0, 0, 0.38);
+        inset 0 0 18px rgba(255, 255, 255, 0.04),
+        0 6px 16px rgba(0, 0, 0, 0.35);
     }
 
     .calc-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
       flex: 0 0 auto;
     }
 
     .brand-wrap {
       display: flex;
       align-items: center;
-      gap: 11px;
+      gap: 9px;
       min-width: 0;
     }
 
     .brand-icon {
       width: 0;
       height: 0;
-      border-top: 15px solid transparent;
-      border-bottom: 15px solid transparent;
-      border-left: 22px solid #f15a18;
+      border-top: 12px solid transparent;
+      border-bottom: 12px solid transparent;
+      border-left: 18px solid #f15a18;
       transform: skewX(-10deg);
       flex-shrink: 0;
     }
@@ -99,38 +99,38 @@
     }
 
     .brand-title {
-      font-size: clamp(16px, 2.3vw, 32px);
+      font-size: clamp(13px, 1.8vw, 25px);
       font-weight: 900;
       font-style: italic;
-      letter-spacing: 1.2px;
+      letter-spacing: 1px;
       white-space: nowrap;
     }
 
     .brand-subtitle {
       color: #f15a18;
-      font-size: clamp(11px, 1.25vw, 18px);
+      font-size: clamp(9px, 1vw, 14px);
       font-weight: 800;
-      margin-top: 5px;
-      letter-spacing: 0.7px;
+      margin-top: 4px;
+      letter-spacing: 0.6px;
       white-space: nowrap;
     }
 
     .mode-toggle {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
       background: rgba(255, 255, 255, 0.07);
       border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: 16px;
-      padding: 8px 12px;
+      border-radius: 14px;
+      padding: 6px 9px;
       flex-shrink: 0;
     }
 
     .mode-toggle label {
       display: flex;
       align-items: center;
-      gap: 5px;
-      font-size: clamp(12px, 1.15vw, 16px);
+      gap: 4px;
+      font-size: clamp(10px, 1vw, 14px);
       font-weight: 700;
       cursor: pointer;
     }
@@ -142,10 +142,10 @@
     .display-panel {
       background: linear-gradient(180deg, #101217 0%, #090a0d 100%);
       border: 1px solid rgba(255, 255, 255, 0.13);
-      border-radius: 18px;
-      padding: 13px 15px;
+      border-radius: 16px;
+      padding: 10px 12px;
       flex: 0 0 auto;
-      min-height: 112px;
+      min-height: 94px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -153,24 +153,24 @@
     }
 
     .screen-label {
-      font-size: clamp(11px, 1.05vw, 15px);
+      font-size: clamp(9px, 0.95vw, 13px);
       color: #d6d6d6;
-      letter-spacing: 1.2px;
+      letter-spacing: 1px;
       font-weight: 700;
     }
 
     .expression-screen {
-      min-height: 22px;
+      min-height: 20px;
       color: #cfcfcf;
       text-align: right;
-      font-size: clamp(13px, 1.15vw, 17px);
+      font-size: clamp(11px, 1vw, 15px);
       overflow-wrap: anywhere;
     }
 
     .result-screen {
       color: #ffffff;
       text-align: right;
-      font-size: clamp(34px, 5vw, 70px);
+      font-size: clamp(26px, 4vw, 55px);
       font-weight: 900;
       overflow-wrap: anywhere;
     }
@@ -178,32 +178,42 @@
     .top-tools {
       display: grid;
       grid-template-columns: repeat(5, 1fr);
-      gap: 9px;
+      gap: 7px;
       flex: 0 0 auto;
     }
 
+    /*
+      Main calculator grid:
+      5 columns.
+      The last column is only for operators:
+      ÷
+      ×
+      −
+      +
+      =
+    */
     .main-grid {
       flex: 1 1 auto;
       min-height: 0;
       display: grid;
       grid-template-columns: repeat(5, 1fr);
-      grid-template-rows: repeat(7, 1fr);
-      gap: 9px;
+      grid-template-rows: repeat(6, 1fr);
+      gap: 7px;
     }
 
     button {
       border: none;
-      border-radius: 14px;
+      border-radius: 12px;
       cursor: pointer;
       color: #ffffff;
       font-weight: 900;
-      font-size: clamp(16px, 1.85vw, 31px);
-      min-height: 52px;
-      padding: 0 5px;
+      font-size: clamp(13px, 1.55vw, 25px);
+      min-height: 42px;
+      padding: 0 4px;
       background: linear-gradient(180deg, #343a46 0%, #1f2530 100%);
       box-shadow:
         inset 0 1px 1px rgba(255, 255, 255, 0.10),
-        0 4px 8px rgba(0, 0, 0, 0.36);
+        0 3px 7px rgba(0, 0, 0, 0.34);
       transition: 0.12s ease;
     }
 
@@ -218,31 +228,31 @@
 
     .tool-btn {
       background: linear-gradient(180deg, #4d5a70 0%, #303b4d 100%);
-      font-size: clamp(13px, 1.4vw, 21px);
+      font-size: clamp(11px, 1.2vw, 18px);
     }
 
     .science-btn {
       background: linear-gradient(180deg, #333946 0%, #202633 100%);
       color: #f2f2f2;
-      font-size: clamp(15px, 1.55vw, 26px);
+      font-size: clamp(12px, 1.35vw, 22px);
     }
 
     .number-btn {
       background: linear-gradient(180deg, #485266 0%, #303a4d 100%);
       color: #ffffff;
-      font-size: clamp(21px, 2.3vw, 38px);
+      font-size: clamp(16px, 1.9vw, 30px);
     }
 
     .operator-btn {
       background: linear-gradient(180deg, #ff742d 0%, #e54c0d 100%);
       color: #ffffff;
-      font-size: clamp(24px, 2.7vw, 44px);
+      font-size: clamp(18px, 2.3vw, 36px);
     }
 
     .equal-btn {
       background: linear-gradient(180deg, #ff8a3d 0%, #df4a0b 100%);
       color: #ffffff;
-      font-size: clamp(24px, 2.7vw, 44px);
+      font-size: clamp(18px, 2.3vw, 36px);
     }
 
     .clear-btn {
@@ -257,35 +267,35 @@
       flex: 0 0 auto;
       text-align: center;
       color: #cfcfcf;
-      font-size: clamp(9px, 0.9vw, 12px);
+      font-size: clamp(8px, 0.8vw, 11px);
       line-height: 1.2;
     }
 
     @media (max-width: 900px) {
       .calculator-area {
-        padding: 9px;
-        border-radius: 22px;
+        padding: 8px;
+        border-radius: 19px;
       }
 
       .calculator-shell {
-        padding: 10px;
-        border-radius: 16px;
-        gap: 7px;
+        padding: 9px;
+        border-radius: 15px;
+        gap: 6px;
       }
 
       .display-panel {
-        min-height: 82px;
-        padding: 9px;
+        min-height: 75px;
+        padding: 8px;
       }
 
       .top-tools,
       .main-grid {
-        gap: 6px;
+        gap: 5px;
       }
 
       button {
         border-radius: 9px;
-        min-height: 35px;
+        min-height: 31px;
       }
     }
 
@@ -299,18 +309,18 @@
       }
 
       .calculator-area {
-        left: 4.5%;
-        top: 37.2%;
-        width: 68.5%;
-        height: 52.5%;
+        left: 7.7%;
+        top: 39.2%;
+        width: 60.8%;
+        height: 45.2%;
       }
 
       .brand-title {
-        font-size: 12px;
+        font-size: 10px;
       }
 
       .brand-subtitle {
-        font-size: 9px;
+        font-size: 8px;
       }
 
       .mode-toggle {
@@ -368,42 +378,49 @@
 
         <div class="main-grid">
 
+          <!-- Row 1 -->
           <button class="science-btn" onclick="appendToken('sin(')">sin</button>
           <button class="science-btn" onclick="appendToken('cos(')">cos</button>
           <button class="science-btn" onclick="appendToken('tan(')">tan</button>
           <button class="science-btn" onclick="appendToken('π')">π</button>
           <button class="operator-btn" onclick="appendToken('÷')">÷</button>
 
+          <!-- Row 2 -->
           <button class="science-btn" onclick="appendToken('asin(')">sin⁻¹</button>
           <button class="science-btn" onclick="appendToken('acos(')">cos⁻¹</button>
           <button class="science-btn" onclick="appendToken('atan(')">tan⁻¹</button>
           <button class="science-btn" onclick="appendToken('ℯ')">e</button>
           <button class="operator-btn" onclick="appendToken('×')">×</button>
 
+          <!-- Row 3 -->
           <button class="science-btn" onclick="appendToken('^2')">x²</button>
           <button class="science-btn" onclick="appendToken('^3')">x³</button>
           <button class="science-btn" onclick="appendToken('sqrt(')">√</button>
           <button class="science-btn" onclick="appendToken('log(')">log</button>
           <button class="operator-btn" onclick="appendToken('−')">−</button>
 
+          <!-- Row 4 -->
           <button class="number-btn" onclick="appendToken('7')">7</button>
           <button class="number-btn" onclick="appendToken('8')">8</button>
           <button class="number-btn" onclick="appendToken('9')">9</button>
           <button class="science-btn" onclick="appendToken('ln(')">ln</button>
           <button class="operator-btn" onclick="appendToken('+')">+</button>
 
+          <!-- Row 5 -->
           <button class="number-btn" onclick="appendToken('4')">4</button>
           <button class="number-btn" onclick="appendToken('5')">5</button>
           <button class="number-btn" onclick="appendToken('6')">6</button>
           <button class="science-btn" onclick="appendToken('(')">(</button>
           <button class="equal-btn" onclick="calculate()">=</button>
 
+          <!-- Row 6 -->
           <button class="number-btn" onclick="appendToken('1')">1</button>
           <button class="number-btn" onclick="appendToken('2')">2</button>
           <button class="number-btn" onclick="appendToken('3')">3</button>
           <button class="science-btn" onclick="appendToken(')')">)</button>
           <button class="science-btn" onclick="applyPercent()">%</button>
 
+          <!-- Row 7 -->
           <button class="number-btn zero-btn" onclick="appendToken('0')">0</button>
           <button class="number-btn" onclick="appendToken('.')">.</button>
           <button class="science-btn" onclick="toggleSign()">±</button>
@@ -485,6 +502,20 @@
       updateDisplay();
     }
 
+    function factorial(n) {
+      if (n < 0 || !Number.isInteger(n)) {
+        throw new Error("Invalid factorial");
+      }
+
+      let result = 1;
+
+      for (let i = 2; i <= n; i++) {
+        result *= i;
+      }
+
+      return result;
+    }
+
     function formatNumber(value) {
       if (!Number.isFinite(value)) return "Error";
 
@@ -558,13 +589,33 @@
     document.addEventListener("keydown", function(event) {
       const key = event.key;
 
-      if (/[0-9]/.test(key)) appendToken(key);
-      if (key === "+") appendToken("+");
-      if (key === "-") appendToken("−");
-      if (key === "*") appendToken("×");
-      if (key === "/") appendToken("÷");
-      if (key === ".") appendToken(".");
-      if (key === "(" || key === ")") appendToken(key);
+      if (/[0-9]/.test(key)) {
+        appendToken(key);
+      }
+
+      if (key === "+") {
+        appendToken("+");
+      }
+
+      if (key === "-") {
+        appendToken("−");
+      }
+
+      if (key === "*") {
+        appendToken("×");
+      }
+
+      if (key === "/") {
+        appendToken("÷");
+      }
+
+      if (key === ".") {
+        appendToken(".");
+      }
+
+      if (key === "(" || key === ")") {
+        appendToken(key);
+      }
 
       if (key === "Enter") {
         event.preventDefault();
