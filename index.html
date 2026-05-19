@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Newson Sportec Calculator</title>
+  <title>Newson Sportec Scientific Calculator</title>
 
   <style>
     * {
@@ -12,7 +12,7 @@
 
     body {
       margin: 0;
-      background: #050505;
+      background: #0b0b0b;
       font-family: Arial, Helvetica, sans-serif;
       display: flex;
       justify-content: center;
@@ -31,197 +31,231 @@
       overflow: hidden;
     }
 
-    /* Calculator moved LOWER */
+    /* Scientific calculator fitted into the poster */
     .calculator-area {
       position: absolute;
-      left: 7.8%;
-      top: 38.0%;
-      width: 59.5%;
-      height: 46.0%;
-      background: #ffffff;
-      border: 4px solid #e8e8e8;
+      left: 8.2%;
+      top: 39.0%;
+      width: 61%;
+      height: 42.5%;
+      background: #f6f6f6;
+      border: 4px solid #ececec;
       border-radius: 24px;
       box-shadow:
-        0 10px 30px rgba(0, 0, 0, 0.45),
+        0 10px 28px rgba(0, 0, 0, 0.45),
         inset 0 0 0 1px rgba(255, 255, 255, 0.95);
-      padding: 14px;
+      padding: 12px;
       overflow: hidden;
-      z-index: 5;
+      z-index: 10;
     }
 
     .calculator-shell {
       width: 100%;
       height: 100%;
-      background: linear-gradient(180deg, #232323, #101010);
+      background: #eceff3;
       border-radius: 18px;
-      border: 2px solid rgba(255, 255, 255, 0.12);
-      padding: 14px;
+      padding: 12px;
       display: flex;
       flex-direction: column;
-      color: white;
       box-shadow:
-        inset 0 0 14px rgba(255, 255, 255, 0.04),
-        0 4px 12px rgba(0, 0, 0, 0.45);
+        inset 0 0 10px rgba(255, 255, 255, 0.6),
+        0 2px 8px rgba(0, 0, 0, 0.12);
     }
 
     .calc-header {
       display: flex;
       justify-content: space-between;
-      align-items: flex-start;
-      margin-bottom: 12px;
+      align-items: center;
+      margin-bottom: 10px;
       flex: 0 0 auto;
     }
 
     .brand {
       display: flex;
-      align-items: flex-start;
+      align-items: center;
       gap: 8px;
-      font-weight: 900;
-      letter-spacing: 1px;
-      color: #ffffff;
       font-style: italic;
+      font-weight: 900;
       line-height: 1;
-      font-size: clamp(11px, 1.8vw, 24px);
+      color: #ffffff;
     }
 
     .brand-mark {
-      color: #f15a18;
-      font-size: clamp(18px, 2.3vw, 32px);
-      line-height: 1;
-      margin-top: 2px;
+      width: 0;
+      height: 0;
+      border-top: 12px solid transparent;
+      border-bottom: 12px solid transparent;
+      border-left: 18px solid #f05a1a;
     }
 
-    .brand small {
-      display: block;
-      color: #f15a18;
-      font-size: 0.62em;
-      margin-top: 3px;
+    .brand-text {
+      background: linear-gradient(180deg, #2e2f34, #1a1b1f);
+      padding: 8px 10px;
+      border-radius: 10px;
+      min-width: 180px;
+    }
+
+    .brand-text .top {
+      font-size: clamp(12px, 1.5vw, 22px);
       letter-spacing: 0.5px;
     }
 
-    .icons {
-      display: flex;
-      gap: 12px;
-      color: #ffffff;
-      font-size: clamp(14px, 1.8vw, 24px);
-      font-weight: bold;
+    .brand-text .bottom {
+      font-size: clamp(10px, 1vw, 16px);
+      color: #f05a1a;
       margin-top: 2px;
+      letter-spacing: 0.4px;
     }
 
-    .display-box {
-      background: #161616;
-      border: 1px solid rgba(255, 255, 255, 0.13);
-      border-radius: 14px;
-      padding: 12px;
-      margin-bottom: 12px;
+    .header-icons {
+      display: flex;
+      gap: 12px;
+      font-size: clamp(14px, 1.5vw, 22px);
+      color: #2b2b2b;
+      font-weight: bold;
+      padding-right: 4px;
+    }
+
+    .display-wrap {
+      background: #4a70a1;
+      border-radius: 12px;
+      padding: 10px 14px;
+      min-height: 70px;
+      margin-bottom: 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      box-shadow: inset 0 0 6px rgba(255, 255, 255, 0.15);
       flex: 0 0 auto;
     }
 
     .display-label {
-      font-size: clamp(9px, 1vw, 14px);
-      color: #e0e0e0;
-      margin-bottom: 10px;
+      color: #e8edf5;
+      font-size: clamp(10px, 1vw, 14px);
+      margin-bottom: 4px;
       letter-spacing: 1px;
+      text-transform: uppercase;
     }
 
     #display {
       width: 100%;
-      min-height: 72px;
       border: none;
       outline: none;
       background: transparent;
-      color: #ffffff;
       text-align: right;
-      font-size: clamp(28px, 4.8vw, 64px);
+      color: #ffffff;
+      font-size: clamp(24px, 3vw, 42px);
       font-weight: 800;
-    }
-
-    .memory-row {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 8px;
-      margin-bottom: 10px;
-      flex: 0 0 auto;
     }
 
     .button-grid {
       display: grid;
-      grid-template-columns: repeat(5, 1fr);
+      grid-template-columns: repeat(10, minmax(0, 1fr));
       gap: 8px;
       flex: 1 1 auto;
     }
 
-    button {
-      border: none;
-      border-radius: 10px;
-      background: linear-gradient(180deg, #2d2d2d, #161616);
-      color: #f0f0f0;
-      font-weight: 700;
+    button,
+    .mode-box {
+      border: 2px solid #9ab0d1;
+      border-radius: 8px;
+      background: #d6dde7;
+      color: #000000;
+      font-weight: 800;
+      font-size: clamp(11px, 1.35vw, 18px);
+      min-height: 48px;
       cursor: pointer;
-      box-shadow:
-        inset 0 1px 1px rgba(255, 255, 255, 0.10),
-        0 2px 4px rgba(0, 0, 0, 0.45);
-      transition: 0.15s;
-      font-size: clamp(14px, 2vw, 32px);
-      min-height: 52px;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7);
     }
 
     button:hover {
+      filter: brightness(1.03);
       transform: translateY(-1px);
-      filter: brightness(1.08);
     }
 
     button:active {
-      transform: scale(0.97);
+      transform: scale(0.98);
     }
 
-    .memory {
-      font-size: clamp(10px, 1.1vw, 17px);
-      min-height: 40px;
+    .function-btn {
+      background: #d8dee7;
     }
 
-    .operator,
-    .equal {
-      background: linear-gradient(180deg, #ff6e2a, #e24c12);
-      color: white;
+    .number-btn {
+      background: #b9c7db;
     }
 
-    .zero {
+    .operator-btn {
+      background: #cdd6e1;
+    }
+
+    .action-btn {
+      background: #dfe5ec;
+    }
+
+    .memory-btn {
+      background: #d8dfe8;
+    }
+
+    .equal-btn {
+      background: #aebfd7;
+    }
+
+    .mode-box {
       grid-column: span 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 0 8px;
+      font-weight: 700;
+      background: #f1f1f1;
     }
 
-    .equal-wide {
-      grid-column: span 2;
+    .mode-box label {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: clamp(10px, 1.2vw, 16px);
+      cursor: pointer;
     }
 
-    .blank {
-      visibility: hidden;
-      pointer-events: none;
+    .mode-box input[type="radio"] {
+      width: 16px;
+      height: 16px;
+      accent-color: #3f74d8;
+      cursor: pointer;
     }
 
     @media (max-width: 900px) {
       .calculator-area {
-        padding: 10px;
+        padding: 9px;
         border-radius: 18px;
       }
 
       .calculator-shell {
-        padding: 10px;
+        padding: 8px;
         border-radius: 14px;
       }
 
-      .memory-row,
       .button-grid {
-        gap: 6px;
+        gap: 5px;
       }
 
-      button {
-        border-radius: 7px;
-        min-height: 36px;
+      button,
+      .mode-box {
+        min-height: 34px;
+        border-radius: 6px;
       }
 
-      #display {
+      .display-wrap {
         min-height: 50px;
+        padding: 8px 10px;
+      }
+
+      .brand-text {
+        min-width: auto;
+        padding: 6px 8px;
       }
     }
 
@@ -235,192 +269,499 @@
       }
 
       .calculator-area {
-        left: 7.8%;
-        top: 38.0%;
-        width: 59.5%;
-        height: 46.0%;
+        left: 8.2%;
+        top: 39.0%;
+        width: 61%;
+        height: 42.5%;
       }
     }
   </style>
 </head>
-
 <body>
 
   <div class="poster-wrapper">
-
     <div class="calculator-area">
       <div class="calculator-shell">
 
         <div class="calc-header">
           <div class="brand">
-            <div class="brand-mark">▶</div>
-            <div>
-              NEWSON
-              <small>SPORTEC</small>
+            <div class="brand-mark"></div>
+            <div class="brand-text">
+              <div class="top">NEWSON</div>
+              <div class="bottom">SPORTEC</div>
             </div>
           </div>
 
-          <div class="icons">
-            <span>↺</span>
-            <span>☰</span>
+          <div class="header-icons">
+            <span title="Clear">↺</span>
+            <span title="Menu">☰</span>
           </div>
         </div>
 
-        <div class="display-box">
-          <div class="display-label">RESULT</div>
+        <div class="display-wrap">
+          <div class="display-label">Result</div>
           <input type="text" id="display" value="0" readonly />
         </div>
 
-        <div class="memory-row">
-          <button class="memory" onclick="memoryClear()">MC</button>
-          <button class="memory" onclick="memoryRecall()">MR</button>
-          <button class="memory" onclick="memoryAdd()">M+</button>
-          <button class="memory" onclick="memorySubtract()">M−</button>
-          <button class="memory" onclick="memoryStore()">MS</button>
-        </div>
-
         <div class="button-grid">
-          <button onclick="percent()">%</button>
-          <button onclick="toggleSign()">+/−</button>
-          <button onclick="appendValue('(')">(</button>
-          <button onclick="appendValue(')')">)</button>
-          <button class="operator" onclick="appendValue('/')">÷</button>
+          <!-- Row 1 -->
+          <button class="function-btn" onclick="applyTrig('sin')">sin</button>
+          <button class="function-btn" onclick="applyTrig('cos')">cos</button>
+          <button class="function-btn" onclick="applyTrig('tan')">tan</button>
 
-          <button onclick="appendValue('7')">7</button>
-          <button onclick="appendValue('8')">8</button>
-          <button onclick="appendValue('9')">9</button>
-          <button class="blank"></button>
-          <button class="operator" onclick="appendValue('*')">×</button>
+          <div class="mode-box">
+            <label><input type="radio" name="angleMode" checked onchange="setAngleMode('deg')">Deg</label>
+            <label><input type="radio" name="angleMode" onchange="setAngleMode('rad')">Rad</label>
+          </div>
 
-          <button onclick="appendValue('4')">4</button>
-          <button onclick="appendValue('5')">5</button>
-          <button onclick="appendValue('6')">6</button>
-          <button class="blank"></button>
-          <button class="operator" onclick="appendValue('-')">−</button>
+          <button class="number-btn" onclick="appendText('7')">7</button>
+          <button class="number-btn" onclick="appendText('8')">8</button>
+          <button class="number-btn" onclick="appendText('9')">9</button>
+          <button class="operator-btn" onclick="appendOperator('+')">+</button>
+          <button class="action-btn" onclick="backspace()">Back</button>
 
-          <button onclick="appendValue('1')">1</button>
-          <button onclick="appendValue('2')">2</button>
-          <button onclick="appendValue('3')">3</button>
-          <button class="blank"></button>
-          <button class="operator" onclick="appendValue('+')">+</button>
+          <!-- Row 2 -->
+          <button class="function-btn" onclick="applyInverseTrig('asin')">sin<sup>-1</sup></button>
+          <button class="function-btn" onclick="applyInverseTrig('acos')">cos<sup>-1</sup></button>
+          <button class="function-btn" onclick="applyInverseTrig('atan')">tan<sup>-1</sup></button>
+          <button class="function-btn" onclick="insertConstant('π')">π</button>
+          <button class="function-btn" onclick="insertConstant('e')">e</button>
+          <button class="number-btn" onclick="appendText('4')">4</button>
+          <button class="number-btn" onclick="appendText('5')">5</button>
+          <button class="number-btn" onclick="appendText('6')">6</button>
+          <button class="operator-btn" onclick="appendOperator('−')">−</button>
+          <button class="action-btn" onclick="insertAns()">Ans</button>
 
-          <button class="zero" onclick="appendValue('0')">0</button>
-          <button onclick="appendValue('.')">.</button>
-          <button class="equal equal-wide" onclick="calculate()">=</button>
+          <!-- Row 3 -->
+          <button class="function-btn" onclick="powerXY()">x<sup>y</sup></button>
+          <button class="function-btn" onclick="cubeCurrent()">x<sup>3</sup></button>
+          <button class="function-btn" onclick="squareCurrent()">x<sup>2</sup></button>
+          <button class="function-btn" onclick="expCurrent()">e<sup>x</sup></button>
+          <button class="function-btn" onclick="tenPowerCurrent()">10<sup>x</sup></button>
+          <button class="number-btn" onclick="appendText('1')">1</button>
+          <button class="number-btn" onclick="appendText('2')">2</button>
+          <button class="number-btn" onclick="appendText('3')">3</button>
+          <button class="operator-btn" onclick="appendOperator('×')">×</button>
+          <button class="memory-btn" onclick="memoryAdd()">M+</button>
+
+          <!-- Row 4 -->
+          <button class="function-btn" onclick="yRootX()">y√x</button>
+          <button class="function-btn" onclick="cubeRootCurrent()"><sup>3</sup>√x</button>
+          <button class="function-btn" onclick="squareRootCurrent()">√x</button>
+          <button class="function-btn" onclick="lnCurrent()">ln</button>
+          <button class="function-btn" onclick="logCurrent()">log</button>
+          <button class="number-btn" onclick="appendText('0')">0</button>
+          <button class="number-btn" onclick="appendText('.')">.</button>
+          <button class="action-btn" onclick="appendText('E')">EXP</button>
+          <button class="operator-btn" onclick="appendOperator('÷')">/</button>
+          <button class="memory-btn" onclick="memorySubtract()">M-</button>
+
+          <!-- Row 5 -->
+          <button class="function-btn" onclick="appendText('(')">(</button>
+          <button class="function-btn" onclick="appendText(')')">)</button>
+          <button class="function-btn" onclick="reciprocalCurrent()">1/x</button>
+          <button class="function-btn" onclick="percentCurrent()">%</button>
+          <button class="function-btn" onclick="factorialCurrent()">n!</button>
+          <button class="action-btn" onclick="toggleSign()">±</button>
+          <button class="action-btn" onclick="randomCurrent()">RND</button>
+          <button class="action-btn" onclick="allClear()">AC</button>
+          <button class="equal-btn" onclick="calculate()">=</button>
+          <button class="memory-btn" onclick="memoryRecall()">MR</button>
         </div>
 
       </div>
     </div>
-
   </div>
 
   <script>
     const display = document.getElementById("display");
-    let memoryValue = 0;
 
-    function appendValue(value) {
-      if (display.value === "0" || display.value === "Error") {
-        display.value = value;
+    let angleMode = "deg";
+    let lastAnswer = 0;
+    let memoryValue = 0;
+    let justEvaluated = false;
+
+    function setAngleMode(mode) {
+      angleMode = mode;
+    }
+
+    function allClear() {
+      display.value = "0";
+      justEvaluated = false;
+    }
+
+    function backspace() {
+      if (display.value === "Error") {
+        display.value = "0";
+        return;
+      }
+
+      if (justEvaluated) {
+        display.value = "0";
+        justEvaluated = false;
+        return;
+      }
+
+      if (display.value.length <= 1) {
+        display.value = "0";
       } else {
-        display.value += value;
+        display.value = display.value.slice(0, -1);
+        if (display.value === "" || display.value === "-") {
+          display.value = "0";
+        }
       }
     }
 
-    function clearDisplay() {
-      display.value = "0";
+    function appendText(text) {
+      if (display.value === "Error") {
+        display.value = "0";
+      }
+
+      if (justEvaluated && /[0-9.(]/.test(text)) {
+        display.value = text === "." ? "0." : text;
+        justEvaluated = false;
+        return;
+      }
+
+      justEvaluated = false;
+
+      let current = display.value;
+
+      if (current === "0" && /^[0-9]$/.test(text)) {
+        display.value = text;
+        return;
+      }
+
+      if (current === "0" && text === ".") {
+        display.value = "0.";
+        return;
+      }
+
+      if (current === "0" && text === "(") {
+        display.value = "(";
+        return;
+      }
+
+      if (text === ".") {
+        let lastPart = current.split(/[+\−×÷()]/).pop();
+        if (lastPart.includes(".")) return;
+        if (/[+\−×÷(]$/.test(current)) current += "0";
+      }
+
+      if (text === "(" && /[0-9πe)]$/.test(current)) {
+        current += "×";
+      }
+
+      if (text === "E" && !/[0-9.]$/.test(current)) {
+        return;
+      }
+
+      display.value = current + text;
+    }
+
+    function appendOperator(op) {
+      if (display.value === "Error") {
+        display.value = "0";
+      }
+
+      justEvaluated = false;
+
+      let current = display.value;
+
+      if (current === "0") {
+        if (op === "−") {
+          display.value = "−";
+        }
+        return;
+      }
+
+      if (/E$/.test(current) && op === "−") {
+        display.value = current + op;
+        return;
+      }
+
+      if (/[+\−×÷]$/.test(current)) {
+        current = current.slice(0, -1);
+      }
+
+      display.value = current + op;
+    }
+
+    function insertConstant(symbol) {
+      if (display.value === "Error") {
+        display.value = "0";
+      }
+
+      let current = justEvaluated ? "" : display.value;
+      justEvaluated = false;
+
+      if (current === "0") current = "";
+
+      if (/[0-9πe)]$/.test(current)) {
+        current += "×";
+      }
+
+      display.value = current + symbol;
+    }
+
+    function insertAns() {
+      let ansText = formatNumber(lastAnswer);
+
+      if (display.value === "Error") {
+        display.value = "0";
+      }
+
+      let current = justEvaluated ? "" : display.value;
+      justEvaluated = false;
+
+      if (current === "0") current = "";
+
+      if (/[0-9πe)]$/.test(current)) {
+        current += "×";
+      }
+
+      display.value = current + ansText;
+    }
+
+    function evaluateExpression(expr) {
+      let s = expr.trim();
+
+      if (s === "") return 0;
+
+      s = s.replace(/×/g, "*")
+           .replace(/÷/g, "/")
+           .replace(/−/g, "-")
+           .replace(/π/g, "(" + Math.PI + ")")
+           .replace(/\be\b/g, "(" + Math.E + ")");
+
+      if (/[^0-9+\-*/().E ]/.test(s)) {
+        throw new Error("Invalid expression");
+      }
+
+      return Function('"use strict"; return (' + s + ')')();
+    }
+
+    function getCurrentValue() {
+      try {
+        let value = evaluateExpression(display.value);
+        if (!Number.isFinite(value)) throw new Error("Bad result");
+        return value;
+      } catch (error) {
+        display.value = "Error";
+        return null;
+      }
+    }
+
+    function setResult(value) {
+      if (!Number.isFinite(value) || Number.isNaN(value)) {
+        display.value = "Error";
+        return;
+      }
+
+      lastAnswer = value;
+      display.value = formatNumber(value);
+      justEvaluated = true;
+    }
+
+    function formatNumber(value) {
+      if (!Number.isFinite(value)) return "Error";
+
+      if (Math.abs(value) >= 1e12 || (Math.abs(value) > 0 && Math.abs(value) < 1e-9)) {
+        return value.toExponential(8).replace(/\.?0+e/, "e");
+      }
+
+      return Number(value.toPrecision(12)).toString();
     }
 
     function calculate() {
-      try {
-        let expression = display.value;
-
-        if (!/^[0-9+\-*/().% ]+$/.test(expression)) {
-          display.value = "Error";
-          return;
-        }
-
-        let result = Function('"use strict"; return (' + expression + ')')();
-        display.value = result;
-      } catch {
-        display.value = "Error";
-      }
+      let value = getCurrentValue();
+      if (value === null) return;
+      setResult(value);
     }
 
-    function percent() {
-      try {
-        let value = parseFloat(display.value);
-        if (isNaN(value)) {
-          display.value = "Error";
-          return;
-        }
-        display.value = value / 100;
-      } catch {
+    function toRadians(x) {
+      return angleMode === "deg" ? x * Math.PI / 180 : x;
+    }
+
+    function fromRadians(x) {
+      return angleMode === "deg" ? x * 180 / Math.PI : x;
+    }
+
+    function applyTrig(type) {
+      let x = getCurrentValue();
+      if (x === null) return;
+
+      let result;
+      if (type === "sin") result = Math.sin(toRadians(x));
+      if (type === "cos") result = Math.cos(toRadians(x));
+      if (type === "tan") result = Math.tan(toRadians(x));
+
+      setResult(result);
+    }
+
+    function applyInverseTrig(type) {
+      let x = getCurrentValue();
+      if (x === null) return;
+
+      let result;
+      if (type === "asin") result = fromRadians(Math.asin(x));
+      if (type === "acos") result = fromRadians(Math.acos(x));
+      if (type === "atan") result = fromRadians(Math.atan(x));
+
+      setResult(result);
+    }
+
+    function squareCurrent() {
+      let x = getCurrentValue();
+      if (x === null) return;
+      setResult(x * x);
+    }
+
+    function cubeCurrent() {
+      let x = getCurrentValue();
+      if (x === null) return;
+      setResult(x * x * x);
+    }
+
+    function expCurrent() {
+      let x = getCurrentValue();
+      if (x === null) return;
+      setResult(Math.exp(x));
+    }
+
+    function tenPowerCurrent() {
+      let x = getCurrentValue();
+      if (x === null) return;
+      setResult(Math.pow(10, x));
+    }
+
+    function squareRootCurrent() {
+      let x = getCurrentValue();
+      if (x === null) return;
+      setResult(Math.sqrt(x));
+    }
+
+    function cubeRootCurrent() {
+      let x = getCurrentValue();
+      if (x === null) return;
+      setResult(Math.cbrt(x));
+    }
+
+    function lnCurrent() {
+      let x = getCurrentValue();
+      if (x === null) return;
+      setResult(Math.log(x));
+    }
+
+    function logCurrent() {
+      let x = getCurrentValue();
+      if (x === null) return;
+      setResult(Math.log10(x));
+    }
+
+    function reciprocalCurrent() {
+      let x = getCurrentValue();
+      if (x === null) return;
+      setResult(1 / x);
+    }
+
+    function percentCurrent() {
+      let x = getCurrentValue();
+      if (x === null) return;
+      setResult(x / 100);
+    }
+
+    function factorialCurrent() {
+      let x = getCurrentValue();
+      if (x === null) return;
+
+      if (x < 0 || !Number.isInteger(x)) {
         display.value = "Error";
+        return;
       }
+
+      let result = 1;
+      for (let i = 2; i <= x; i++) {
+        result *= i;
+      }
+
+      setResult(result);
     }
 
     function toggleSign() {
-      if (display.value === "0" || display.value === "Error") return;
+      let x = getCurrentValue();
+      if (x === null) return;
+      setResult(-x);
+    }
 
-      if (display.value.startsWith("-")) {
-        display.value = display.value.substring(1);
-      } else {
-        display.value = "-" + display.value;
+    function randomCurrent() {
+      setResult(Math.random());
+    }
+
+    function powerXY() {
+      let x = getCurrentValue();
+      if (x === null) return;
+
+      let y = prompt("Enter the exponent y:", "2");
+      if (y === null) return;
+
+      let yValue = parseFloat(y);
+      if (isNaN(yValue)) {
+        display.value = "Error";
+        return;
       }
+
+      setResult(Math.pow(x, yValue));
     }
 
-    function memoryClear() {
-      memoryValue = 0;
-      clearDisplay();
-    }
+    function yRootX() {
+      let x = getCurrentValue();
+      if (x === null) return;
 
-    function memoryRecall() {
-      display.value = memoryValue.toString();
+      let y = prompt("Enter the root number y:", "2");
+      if (y === null) return;
+
+      let yValue = parseFloat(y);
+      if (isNaN(yValue) || yValue === 0) {
+        display.value = "Error";
+        return;
+      }
+
+      setResult(Math.pow(x, 1 / yValue));
     }
 
     function memoryAdd() {
-      let current = parseFloat(display.value);
-      if (!isNaN(current)) {
-        memoryValue += current;
-      }
+      let x = getCurrentValue();
+      if (x === null) return;
+      memoryValue += x;
+      setResult(x);
     }
 
     function memorySubtract() {
-      let current = parseFloat(display.value);
-      if (!isNaN(current)) {
-        memoryValue -= current;
-      }
+      let x = getCurrentValue();
+      if (x === null) return;
+      memoryValue -= x;
+      setResult(x);
     }
 
-    function memoryStore() {
-      let current = parseFloat(display.value);
-      if (!isNaN(current)) {
-        memoryValue = current;
-      }
+    function memoryRecall() {
+      setResult(memoryValue);
     }
 
     document.addEventListener("keydown", function(event) {
       const key = event.key;
 
-      if ("0123456789+-*/().".includes(key)) {
-        appendValue(key);
-      }
-
-      if (key === "Enter") {
-        calculate();
-      }
-
-      if (key === "Backspace") {
-        if (display.value.length > 1 && display.value !== "Error") {
-          display.value = display.value.slice(0, -1);
-        } else {
-          display.value = "0";
-        }
-      }
-
-      if (key === "Escape") {
-        clearDisplay();
-      }
+      if (/^[0-9]$/.test(key)) appendText(key);
+      if (key === ".") appendText(".");
+      if (key === "(") appendText("(");
+      if (key === ")") appendText(")");
+      if (key === "+") appendOperator("+");
+      if (key === "-") appendOperator("−");
+      if (key === "*") appendOperator("×");
+      if (key === "/") appendOperator("÷");
+      if (key === "Enter") calculate();
+      if (key === "Backspace") backspace();
+      if (key === "Escape") allClear();
     });
   </script>
 
