@@ -17,21 +17,59 @@
       background: #050505;
       display: flex;
       justify-content: center;
-      align-items: center;
+      align-items: flex-start;
       font-family: Arial, Helvetica, sans-serif;
     }
 
-    .poster-wrapper {
+    /*
+      This is the longer website poster area.
+      The original image stays at the top.
+      Extra space is added below.
+    */
+    .page-wrapper {
       position: relative;
       width: min(100vw, 1122px);
-      aspect-ratio: 1122 / 1402;
-      background-image: url("calculator-poster.png");
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
+      aspect-ratio: 1122 / 1760;
+      background: #050505;
       overflow: hidden;
     }
 
+    /*
+      This keeps the original poster image the same size ratio.
+      The calculator position is based on this original poster layer.
+    */
+    .poster-original {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      aspect-ratio: 1122 / 1402;
+      background-image: url("calculator-poster.png");
+      background-size: cover;
+      background-position: top center;
+      background-repeat: no-repeat;
+      z-index: 1;
+    }
+
+    /*
+      Dark extension below the original image.
+      This makes the total poster look longer.
+    */
+    .poster-extension {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: calc(100% * 1402 / 1760);
+      bottom: 0;
+      background:
+        linear-gradient(180deg, #111 0%, #050505 45%, #050505 100%);
+      z-index: 0;
+    }
+
+    /*
+      Calculator stays in the SAME position
+      because it is inside .poster-original.
+    */
     .calculator-area {
       position: absolute;
       left: 4.5%;
@@ -257,6 +295,61 @@
       line-height: 1.2;
     }
 
+    /*
+      New orange banner.
+      This is now below the calculator.
+    */
+    .try-banner {
+      position: absolute;
+      left: 4.5%;
+      width: 68.5%;
+      top: 74.5%;
+      height: 8.2%;
+      z-index: 4;
+      background: linear-gradient(90deg, #f15a18 0%, #e7450c 75%, #111 75%, #111 100%);
+      display: flex;
+      align-items: center;
+      padding-left: 4%;
+      color: white;
+      font-size: clamp(22px, 5vw, 60px);
+      font-weight: 900;
+      font-style: italic;
+      letter-spacing: 1px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.45);
+      border-top: 2px solid rgba(255, 255, 255, 0.18);
+      border-bottom: 2px solid rgba(0, 0, 0, 0.5);
+    }
+
+    .try-banner::after {
+      content: "››";
+      position: absolute;
+      right: 3%;
+      color: #f15a18;
+      background: #111;
+      padding: 0 16px;
+      font-size: 1.1em;
+      letter-spacing: -8px;
+    }
+
+    .bottom-brand {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 3%;
+      z-index: 3;
+      text-align: center;
+      color: white;
+      font-weight: 900;
+      font-style: italic;
+      font-size: clamp(20px, 4.5vw, 54px);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+
+    .bottom-brand span {
+      color: #f15a18;
+    }
+
     @media (max-width: 900px) {
       .calculator-area {
         padding: 9px;
@@ -285,23 +378,21 @@
       }
     }
 
-    /* iPhone and small phone adjustment */
     @media (max-width: 600px) {
       body {
         align-items: flex-start;
-        background: #050505;
       }
 
-      .poster-wrapper {
+      .page-wrapper {
         width: 100vw;
-        aspect-ratio: 1122 / 1402;
+        aspect-ratio: 1122 / 1760;
       }
 
       .calculator-area {
-        left: 3.5%;
-        top: 37.6%;
-        width: 71.5%;
-        height: 52.8%;
+        left: 4.5%;
+        top: 37.2%;
+        width: 68.5%;
+        height: 52.5%;
         padding: 5px;
         border-radius: 14px;
         border: 3px solid #f2f2f2;
@@ -399,102 +490,130 @@
       .note {
         font-size: 6px;
       }
+
+      .try-banner {
+        left: 4.5%;
+        width: 68.5%;
+        top: 74.5%;
+        height: 8.2%;
+        font-size: clamp(18px, 5vw, 36px);
+      }
+
+      .try-banner::after {
+        padding: 0 8px;
+      }
     }
   </style>
 </head>
 
 <body>
 
-  <div class="poster-wrapper">
-    <div class="calculator-area">
-      <div class="calculator-shell">
+  <div class="page-wrapper">
 
-        <div class="calc-header">
-          <div class="brand-wrap">
-            <div class="brand-icon"></div>
-            <div class="brand-text">
-              <div class="brand-title">NEWSON SPORTEC</div>
-              <div class="brand-subtitle">SCIENTIFIC CALCULATOR</div>
+    <div class="poster-extension"></div>
+
+    <div class="poster-original">
+
+      <div class="calculator-area">
+        <div class="calculator-shell">
+
+          <div class="calc-header">
+            <div class="brand-wrap">
+              <div class="brand-icon"></div>
+              <div class="brand-text">
+                <div class="brand-title">NEWSON SPORTEC</div>
+                <div class="brand-subtitle">SCIENTIFIC CALCULATOR</div>
+              </div>
+            </div>
+
+            <div class="mode-toggle">
+              <label>
+                <input type="radio" name="angleMode" value="deg" checked />
+                Deg
+              </label>
+              <label>
+                <input type="radio" name="angleMode" value="rad" />
+                Rad
+              </label>
             </div>
           </div>
 
-          <div class="mode-toggle">
-            <label>
-              <input type="radio" name="angleMode" value="deg" checked />
-              Deg
-            </label>
-            <label>
-              <input type="radio" name="angleMode" value="rad" />
-              Rad
-            </label>
+          <div class="display-panel">
+            <div class="screen-label">RESULT</div>
+            <div id="expression" class="expression-screen">0</div>
+            <div id="result" class="result-screen">0</div>
           </div>
+
+          <div class="top-tools">
+            <button class="tool-btn" onclick="useAnswer()">Ans</button>
+            <button class="tool-btn" onclick="backspace()">Back</button>
+            <button class="tool-btn clear-btn" onclick="clearAll()">AC</button>
+            <button class="tool-btn" onclick="memoryStore()">MS</button>
+            <button class="tool-btn" onclick="memoryRecall()">MR</button>
+          </div>
+
+          <div class="main-grid">
+
+            <button class="science-btn" onclick="appendToken('sin(')">sin</button>
+            <button class="science-btn" onclick="appendToken('cos(')">cos</button>
+            <button class="science-btn" onclick="appendToken('tan(')">tan</button>
+            <button class="science-btn" onclick="appendToken('π')">π</button>
+            <button class="operator-btn" onclick="appendToken('÷')">÷</button>
+
+            <button class="science-btn" onclick="appendToken('asin(')">sin⁻¹</button>
+            <button class="science-btn" onclick="appendToken('acos(')">cos⁻¹</button>
+            <button class="science-btn" onclick="appendToken('atan(')">tan⁻¹</button>
+            <button class="science-btn" onclick="appendToken('ℯ')">e</button>
+            <button class="operator-btn" onclick="appendToken('×')">×</button>
+
+            <button class="science-btn" onclick="appendToken('^2')">x²</button>
+            <button class="science-btn" onclick="appendToken('^3')">x³</button>
+            <button class="science-btn" onclick="appendToken('sqrt(')">√</button>
+            <button class="science-btn" onclick="appendToken('log(')">log</button>
+            <button class="operator-btn" onclick="appendToken('−')">−</button>
+
+            <button class="number-btn" onclick="appendToken('7')">7</button>
+            <button class="number-btn" onclick="appendToken('8')">8</button>
+            <button class="number-btn" onclick="appendToken('9')">9</button>
+            <button class="science-btn" onclick="appendToken('ln(')">ln</button>
+            <button class="operator-btn" onclick="appendToken('+')">+</button>
+
+            <button class="number-btn" onclick="appendToken('4')">4</button>
+            <button class="number-btn" onclick="appendToken('5')">5</button>
+            <button class="number-btn" onclick="appendToken('6')">6</button>
+            <button class="science-btn" onclick="appendToken('(')">(</button>
+            <button class="equal-btn" onclick="calculate()">=</button>
+
+            <button class="number-btn" onclick="appendToken('1')">1</button>
+            <button class="number-btn" onclick="appendToken('2')">2</button>
+            <button class="number-btn" onclick="appendToken('3')">3</button>
+            <button class="science-btn" onclick="appendToken(')')">)</button>
+            <button class="science-btn" onclick="applyPercent()">%</button>
+
+            <button class="number-btn zero-btn" onclick="appendToken('0')">0</button>
+            <button class="number-btn" onclick="appendToken('.')">.</button>
+            <button class="science-btn" onclick="toggleSign()">±</button>
+            <button class="science-btn" onclick="appendToken('^')">xʸ</button>
+
+          </div>
+
+          <div class="note">
+            Operators are grouped on the right side: ÷ × − + =
+          </div>
+
         </div>
-
-        <div class="display-panel">
-          <div class="screen-label">RESULT</div>
-          <div id="expression" class="expression-screen">0</div>
-          <div id="result" class="result-screen">0</div>
-        </div>
-
-        <div class="top-tools">
-          <button class="tool-btn" onclick="useAnswer()">Ans</button>
-          <button class="tool-btn" onclick="backspace()">Back</button>
-          <button class="tool-btn clear-btn" onclick="clearAll()">AC</button>
-          <button class="tool-btn" onclick="memoryStore()">MS</button>
-          <button class="tool-btn" onclick="memoryRecall()">MR</button>
-        </div>
-
-        <div class="main-grid">
-
-          <button class="science-btn" onclick="appendToken('sin(')">sin</button>
-          <button class="science-btn" onclick="appendToken('cos(')">cos</button>
-          <button class="science-btn" onclick="appendToken('tan(')">tan</button>
-          <button class="science-btn" onclick="appendToken('π')">π</button>
-          <button class="operator-btn" onclick="appendToken('÷')">÷</button>
-
-          <button class="science-btn" onclick="appendToken('asin(')">sin⁻¹</button>
-          <button class="science-btn" onclick="appendToken('acos(')">cos⁻¹</button>
-          <button class="science-btn" onclick="appendToken('atan(')">tan⁻¹</button>
-          <button class="science-btn" onclick="appendToken('ℯ')">e</button>
-          <button class="operator-btn" onclick="appendToken('×')">×</button>
-
-          <button class="science-btn" onclick="appendToken('^2')">x²</button>
-          <button class="science-btn" onclick="appendToken('^3')">x³</button>
-          <button class="science-btn" onclick="appendToken('sqrt(')">√</button>
-          <button class="science-btn" onclick="appendToken('log(')">log</button>
-          <button class="operator-btn" onclick="appendToken('−')">−</button>
-
-          <button class="number-btn" onclick="appendToken('7')">7</button>
-          <button class="number-btn" onclick="appendToken('8')">8</button>
-          <button class="number-btn" onclick="appendToken('9')">9</button>
-          <button class="science-btn" onclick="appendToken('ln(')">ln</button>
-          <button class="operator-btn" onclick="appendToken('+')">+</button>
-
-          <button class="number-btn" onclick="appendToken('4')">4</button>
-          <button class="number-btn" onclick="appendToken('5')">5</button>
-          <button class="number-btn" onclick="appendToken('6')">6</button>
-          <button class="science-btn" onclick="appendToken('(')">(</button>
-          <button class="equal-btn" onclick="calculate()">=</button>
-
-          <button class="number-btn" onclick="appendToken('1')">1</button>
-          <button class="number-btn" onclick="appendToken('2')">2</button>
-          <button class="number-btn" onclick="appendToken('3')">3</button>
-          <button class="science-btn" onclick="appendToken(')')">)</button>
-          <button class="science-btn" onclick="applyPercent()">%</button>
-
-          <button class="number-btn zero-btn" onclick="appendToken('0')">0</button>
-          <button class="number-btn" onclick="appendToken('.')">.</button>
-          <button class="science-btn" onclick="toggleSign()">±</button>
-          <button class="science-btn" onclick="appendToken('^')">xʸ</button>
-
-        </div>
-
-        <div class="note">
-          Operators are grouped on the right side: ÷ × − + =
-        </div>
-
       </div>
+
     </div>
+
+    <div class="try-banner">
+      Try it on the website
+    </div>
+
+    <div class="bottom-brand">
+      <span>Ride.</span> Build. <span>Perform.</span>
+    </div>
+
   </div>
 
   <script>
