@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 
   <title>Newson Sportec Scientific Calculator</title>
 
@@ -11,14 +11,21 @@
       box-sizing: border-box;
     }
 
+    html,
     body {
       margin: 0;
-      min-height: 100vh;
+      width: 100%;
+      min-height: 100%;
       background: #050505;
+      font-family: Arial, Helvetica, sans-serif;
+      overflow-x: hidden;
+    }
+
+    body {
       display: flex;
       justify-content: center;
-      align-items: center;
-      font-family: Arial, Helvetica, sans-serif;
+      align-items: flex-start;
+      padding: 0;
     }
 
     .poster-wrapper {
@@ -26,16 +33,12 @@
       width: min(100vw, 1122px);
       aspect-ratio: 1122 / 1402;
       background-image: url("calculator-poster.png");
-      background-size: cover;
-      background-position: center;
+      background-size: contain;
+      background-position: top center;
       background-repeat: no-repeat;
       overflow: hidden;
     }
 
-    /*
-      Calculator position on your poster.
-      Change top if you need to move it lower or higher.
-    */
     .calculator-area {
       position: absolute;
       left: 7.7%;
@@ -72,7 +75,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
       flex: 0 0 auto;
     }
 
@@ -145,7 +148,7 @@
       border-radius: 16px;
       padding: 10px 12px;
       flex: 0 0 auto;
-      min-height: 94px;
+      min-height: 88px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -160,7 +163,7 @@
     }
 
     .expression-screen {
-      min-height: 20px;
+      min-height: 18px;
       color: #cfcfcf;
       text-align: right;
       font-size: clamp(11px, 1vw, 15px);
@@ -170,7 +173,7 @@
     .result-screen {
       color: #ffffff;
       text-align: right;
-      font-size: clamp(26px, 4vw, 55px);
+      font-size: clamp(24px, 4vw, 55px);
       font-weight: 900;
       overflow-wrap: anywhere;
     }
@@ -182,22 +185,12 @@
       flex: 0 0 auto;
     }
 
-    /*
-      Main calculator grid:
-      5 columns.
-      The last column is only for operators:
-      ÷
-      ×
-      −
-      +
-      =
-    */
     .main-grid {
       flex: 1 1 auto;
       min-height: 0;
       display: grid;
       grid-template-columns: repeat(5, 1fr);
-      grid-template-rows: repeat(6, 1fr);
+      grid-template-rows: repeat(7, 1fr);
       gap: 7px;
     }
 
@@ -208,13 +201,14 @@
       color: #ffffff;
       font-weight: 900;
       font-size: clamp(13px, 1.55vw, 25px);
-      min-height: 42px;
+      min-height: 0;
       padding: 0 4px;
       background: linear-gradient(180deg, #343a46 0%, #1f2530 100%);
       box-shadow:
         inset 0 1px 1px rgba(255, 255, 255, 0.10),
         0 3px 7px rgba(0, 0, 0, 0.34);
       transition: 0.12s ease;
+      touch-action: manipulation;
     }
 
     button:hover {
@@ -284,7 +278,7 @@
       }
 
       .display-panel {
-        min-height: 75px;
+        min-height: 68px;
         padding: 8px;
       }
 
@@ -295,41 +289,141 @@
 
       button {
         border-radius: 9px;
-        min-height: 31px;
       }
     }
 
     @media (max-width: 600px) {
-      body {
-        align-items: flex-start;
-      }
-
       .poster-wrapper {
         width: 100vw;
+        max-width: 100vw;
       }
 
       .calculator-area {
         left: 7.7%;
         top: 39.2%;
-        width: 60.8%;
-        height: 45.2%;
+        width: 57%;
+        height: 39.5%;
+        padding: 5px;
+        border-width: 2px;
+        border-radius: 13px;
       }
 
-      .brand-title {
-        font-size: 10px;
-      }
-
-      .brand-subtitle {
-        font-size: 8px;
-      }
-
-      .mode-toggle {
-        padding: 4px 5px;
+      .calculator-shell {
+        padding: 5px;
+        border-radius: 10px;
         gap: 4px;
       }
 
+      .brand-wrap {
+        gap: 4px;
+      }
+
+      .brand-icon {
+        border-top-width: 7px;
+        border-bottom-width: 7px;
+        border-left-width: 11px;
+      }
+
+      .brand-title {
+        font-size: 7.5px;
+        letter-spacing: 0.4px;
+      }
+
+      .brand-subtitle {
+        font-size: 5.8px;
+        margin-top: 2px;
+        letter-spacing: 0.2px;
+      }
+
+      .mode-toggle {
+        padding: 2px 3px;
+        gap: 2px;
+        border-radius: 7px;
+      }
+
       .mode-toggle label {
+        font-size: 6px;
+        gap: 1px;
+      }
+
+      .mode-toggle input {
+        width: 8px;
+        height: 8px;
+      }
+
+      .display-panel {
+        min-height: 40px;
+        padding: 4px 5px;
+        border-radius: 8px;
+      }
+
+      .screen-label {
+        font-size: 5.8px;
+        letter-spacing: 0.5px;
+      }
+
+      .expression-screen {
+        min-height: 9px;
+        font-size: 6.5px;
+      }
+
+      .result-screen {
+        font-size: 13px;
+      }
+
+      .top-tools,
+      .main-grid {
+        gap: 3px;
+      }
+
+      button {
+        border-radius: 5px;
+        padding: 0 1px;
         font-size: 8px;
+        box-shadow:
+          inset 0 1px 1px rgba(255, 255, 255, 0.08),
+          0 1px 3px rgba(0, 0, 0, 0.25);
+      }
+
+      .tool-btn {
+        font-size: 6.2px;
+      }
+
+      .science-btn {
+        font-size: 6.8px;
+      }
+
+      .number-btn {
+        font-size: 8.8px;
+      }
+
+      .operator-btn,
+      .equal-btn {
+        font-size: 10px;
+      }
+
+      .note {
+        display: none;
+      }
+    }
+
+    @media (max-width: 390px) {
+      .calculator-area {
+        width: 55.5%;
+        height: 38.5%;
+      }
+
+      button {
+        font-size: 7.2px;
+      }
+
+      .number-btn {
+        font-size: 8px;
+      }
+
+      .operator-btn,
+      .equal-btn {
+        font-size: 9px;
       }
     }
   </style>
@@ -378,49 +472,42 @@
 
         <div class="main-grid">
 
-          <!-- Row 1 -->
           <button class="science-btn" onclick="appendToken('sin(')">sin</button>
           <button class="science-btn" onclick="appendToken('cos(')">cos</button>
           <button class="science-btn" onclick="appendToken('tan(')">tan</button>
           <button class="science-btn" onclick="appendToken('π')">π</button>
           <button class="operator-btn" onclick="appendToken('÷')">÷</button>
 
-          <!-- Row 2 -->
           <button class="science-btn" onclick="appendToken('asin(')">sin⁻¹</button>
           <button class="science-btn" onclick="appendToken('acos(')">cos⁻¹</button>
           <button class="science-btn" onclick="appendToken('atan(')">tan⁻¹</button>
           <button class="science-btn" onclick="appendToken('ℯ')">e</button>
           <button class="operator-btn" onclick="appendToken('×')">×</button>
 
-          <!-- Row 3 -->
           <button class="science-btn" onclick="appendToken('^2')">x²</button>
           <button class="science-btn" onclick="appendToken('^3')">x³</button>
           <button class="science-btn" onclick="appendToken('sqrt(')">√</button>
           <button class="science-btn" onclick="appendToken('log(')">log</button>
           <button class="operator-btn" onclick="appendToken('−')">−</button>
 
-          <!-- Row 4 -->
           <button class="number-btn" onclick="appendToken('7')">7</button>
           <button class="number-btn" onclick="appendToken('8')">8</button>
           <button class="number-btn" onclick="appendToken('9')">9</button>
           <button class="science-btn" onclick="appendToken('ln(')">ln</button>
           <button class="operator-btn" onclick="appendToken('+')">+</button>
 
-          <!-- Row 5 -->
           <button class="number-btn" onclick="appendToken('4')">4</button>
           <button class="number-btn" onclick="appendToken('5')">5</button>
           <button class="number-btn" onclick="appendToken('6')">6</button>
           <button class="science-btn" onclick="appendToken('(')">(</button>
           <button class="equal-btn" onclick="calculate()">=</button>
 
-          <!-- Row 6 -->
           <button class="number-btn" onclick="appendToken('1')">1</button>
           <button class="number-btn" onclick="appendToken('2')">2</button>
           <button class="number-btn" onclick="appendToken('3')">3</button>
           <button class="science-btn" onclick="appendToken(')')">)</button>
           <button class="science-btn" onclick="applyPercent()">%</button>
 
-          <!-- Row 7 -->
           <button class="number-btn zero-btn" onclick="appendToken('0')">0</button>
           <button class="number-btn" onclick="appendToken('.')">.</button>
           <button class="science-btn" onclick="toggleSign()">±</button>
@@ -502,20 +589,6 @@
       updateDisplay();
     }
 
-    function factorial(n) {
-      if (n < 0 || !Number.isInteger(n)) {
-        throw new Error("Invalid factorial");
-      }
-
-      let result = 1;
-
-      for (let i = 2; i <= n; i++) {
-        result *= i;
-      }
-
-      return result;
-    }
-
     function formatNumber(value) {
       if (!Number.isFinite(value)) return "Error";
 
@@ -589,33 +662,13 @@
     document.addEventListener("keydown", function(event) {
       const key = event.key;
 
-      if (/[0-9]/.test(key)) {
-        appendToken(key);
-      }
-
-      if (key === "+") {
-        appendToken("+");
-      }
-
-      if (key === "-") {
-        appendToken("−");
-      }
-
-      if (key === "*") {
-        appendToken("×");
-      }
-
-      if (key === "/") {
-        appendToken("÷");
-      }
-
-      if (key === ".") {
-        appendToken(".");
-      }
-
-      if (key === "(" || key === ")") {
-        appendToken(key);
-      }
+      if (/[0-9]/.test(key)) appendToken(key);
+      if (key === "+") appendToken("+");
+      if (key === "-") appendToken("−");
+      if (key === "*") appendToken("×");
+      if (key === "/") appendToken("÷");
+      if (key === ".") appendToken(".");
+      if (key === "(" || key === ")") appendToken(key);
 
       if (key === "Enter") {
         event.preventDefault();
