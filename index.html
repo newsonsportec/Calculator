@@ -28,6 +28,12 @@
       padding: 0;
     }
 
+    .page-container {
+      width: 100%;
+      max-width: 1122px;
+      margin: 0 auto;
+    }
+
     .poster-wrapper {
       position: relative;
       width: min(100vw, 1122px);
@@ -265,6 +271,84 @@
       line-height: 1.2;
     }
 
+    /* Social media section */
+    .social-section {
+      width: 100%;
+      background: linear-gradient(180deg, #101010 0%, #050505 100%);
+      padding: 28px 16px 34px;
+      text-align: center;
+      border-top: 2px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .social-title {
+      color: #ffffff;
+      font-size: clamp(24px, 4vw, 44px);
+      font-weight: 900;
+      margin: 0 0 10px;
+      letter-spacing: 1px;
+    }
+
+    .social-subtitle {
+      color: #cfcfcf;
+      font-size: clamp(15px, 2vw, 24px);
+      margin: 0 0 24px;
+      line-height: 1.5;
+    }
+
+    .social-icons {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .social-link {
+      width: 82px;
+      height: 82px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 28px;
+      font-weight: 900;
+      box-shadow:
+        0 10px 25px rgba(0, 0, 0, 0.45),
+        inset 0 1px 2px rgba(255, 255, 255, 0.25);
+      transition: 0.2s ease;
+    }
+
+    .social-link:hover {
+      transform: translateY(-4px) scale(1.05);
+      filter: brightness(1.15);
+    }
+
+    .facebook {
+      background: linear-gradient(180deg, #1877f2, #0d47a1);
+    }
+
+    .linkedin {
+      background: linear-gradient(180deg, #0a66c2, #004182);
+    }
+
+    .instagram {
+      background: linear-gradient(135deg, #feda75, #fa7e1e, #d62976, #962fbf, #4f5bd5);
+    }
+
+    .social-name {
+      display: block;
+      margin-top: 8px;
+      color: #ffffff;
+      font-size: 15px;
+      font-weight: 800;
+    }
+
+    .social-item {
+      text-align: center;
+    }
+
     @media (max-width: 900px) {
       .calculator-area {
         padding: 8px;
@@ -405,6 +489,24 @@
       .note {
         display: none;
       }
+
+      .social-section {
+        padding: 24px 12px 30px;
+      }
+
+      .social-icons {
+        gap: 14px;
+      }
+
+      .social-link {
+        width: 68px;
+        height: 68px;
+        font-size: 24px;
+      }
+
+      .social-name {
+        font-size: 13px;
+      }
     }
 
     @media (max-width: 390px) {
@@ -425,102 +527,156 @@
       .equal-btn {
         font-size: 9px;
       }
+
+      .social-link {
+        width: 62px;
+        height: 62px;
+        font-size: 22px;
+      }
     }
   </style>
 </head>
 
 <body>
 
-  <div class="poster-wrapper">
-    <div class="calculator-area">
-      <div class="calculator-shell">
+  <div class="page-container">
 
-        <div class="calc-header">
-          <div class="brand-wrap">
-            <div class="brand-icon"></div>
-            <div class="brand-text">
-              <div class="brand-title">NEWSON SPORTEC</div>
-              <div class="brand-subtitle">SCIENTIFIC CALCULATOR</div>
+    <div class="poster-wrapper">
+      <div class="calculator-area">
+        <div class="calculator-shell">
+
+          <div class="calc-header">
+            <div class="brand-wrap">
+              <div class="brand-icon"></div>
+              <div class="brand-text">
+                <div class="brand-title">NEWSON SPORTEC</div>
+                <div class="brand-subtitle">SCIENTIFIC CALCULATOR</div>
+              </div>
+            </div>
+
+            <div class="mode-toggle">
+              <label>
+                <input type="radio" name="angleMode" value="deg" checked />
+                Deg
+              </label>
+              <label>
+                <input type="radio" name="angleMode" value="rad" />
+                Rad
+              </label>
             </div>
           </div>
 
-          <div class="mode-toggle">
-            <label>
-              <input type="radio" name="angleMode" value="deg" checked />
-              Deg
-            </label>
-            <label>
-              <input type="radio" name="angleMode" value="rad" />
-              Rad
-            </label>
+          <div class="display-panel">
+            <div class="screen-label">RESULT</div>
+            <div id="expression" class="expression-screen">0</div>
+            <div id="result" class="result-screen">0</div>
           </div>
+
+          <div class="top-tools">
+            <button class="tool-btn" onclick="useAnswer()">Ans</button>
+            <button class="tool-btn" onclick="backspace()">Back</button>
+            <button class="tool-btn clear-btn" onclick="clearAll()">AC</button>
+            <button class="tool-btn" onclick="memoryStore()">MS</button>
+            <button class="tool-btn" onclick="memoryRecall()">MR</button>
+          </div>
+
+          <div class="main-grid">
+
+            <button class="science-btn" onclick="appendToken('sin(')">sin</button>
+            <button class="science-btn" onclick="appendToken('cos(')">cos</button>
+            <button class="science-btn" onclick="appendToken('tan(')">tan</button>
+            <button class="science-btn" onclick="appendToken('π')">π</button>
+            <button class="operator-btn" onclick="appendToken('÷')">÷</button>
+
+            <button class="science-btn" onclick="appendToken('asin(')">sin⁻¹</button>
+            <button class="science-btn" onclick="appendToken('acos(')">cos⁻¹</button>
+            <button class="science-btn" onclick="appendToken('atan(')">tan⁻¹</button>
+            <button class="science-btn" onclick="appendToken('ℯ')">e</button>
+            <button class="operator-btn" onclick="appendToken('×')">×</button>
+
+            <button class="science-btn" onclick="appendToken('^2')">x²</button>
+            <button class="science-btn" onclick="appendToken('^3')">x³</button>
+            <button class="science-btn" onclick="appendToken('sqrt(')">√</button>
+            <button class="science-btn" onclick="appendToken('log(')">log</button>
+            <button class="operator-btn" onclick="appendToken('−')">−</button>
+
+            <button class="number-btn" onclick="appendToken('7')">7</button>
+            <button class="number-btn" onclick="appendToken('8')">8</button>
+            <button class="number-btn" onclick="appendToken('9')">9</button>
+            <button class="science-btn" onclick="appendToken('ln(')">ln</button>
+            <button class="operator-btn" onclick="appendToken('+')">+</button>
+
+            <button class="number-btn" onclick="appendToken('4')">4</button>
+            <button class="number-btn" onclick="appendToken('5')">5</button>
+            <button class="number-btn" onclick="appendToken('6')">6</button>
+            <button class="science-btn" onclick="appendToken('(')">(</button>
+            <button class="equal-btn" onclick="calculate()">=</button>
+
+            <button class="number-btn" onclick="appendToken('1')">1</button>
+            <button class="number-btn" onclick="appendToken('2')">2</button>
+            <button class="number-btn" onclick="appendToken('3')">3</button>
+            <button class="science-btn" onclick="appendToken(')')">)</button>
+            <button class="science-btn" onclick="applyPercent()">%</button>
+
+            <button class="number-btn zero-btn" onclick="appendToken('0')">0</button>
+            <button class="number-btn" onclick="appendToken('.')">.</button>
+            <button class="science-btn" onclick="toggleSign()">±</button>
+            <button class="science-btn" onclick="appendToken('^')">xʸ</button>
+
+          </div>
+
+          <div class="note">
+            Operators are grouped on the right side: ÷ × − + =
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <section class="social-section">
+      <h2 class="social-title">Follow Newson Sportec</h2>
+      <p class="social-subtitle">
+        Connect with us for more tools, designs, updates, and product information.
+      </p>
+
+      <div class="social-icons">
+
+        <div class="social-item">
+          <a class="social-link facebook"
+             href="https://www.facebook.com/Newsonsportecnews"
+             target="_blank"
+             rel="noopener noreferrer"
+             aria-label="Newson Sportec Facebook">
+            f
+          </a>
+          <span class="social-name">Facebook</span>
         </div>
 
-        <div class="display-panel">
-          <div class="screen-label">RESULT</div>
-          <div id="expression" class="expression-screen">0</div>
-          <div id="result" class="result-screen">0</div>
+        <div class="social-item">
+          <a class="social-link linkedin"
+             href="https://www.linkedin.com/company/111531327/"
+             target="_blank"
+             rel="noopener noreferrer"
+             aria-label="Newson Sportec LinkedIn">
+            in
+          </a>
+          <span class="social-name">LinkedIn</span>
         </div>
 
-        <div class="top-tools">
-          <button class="tool-btn" onclick="useAnswer()">Ans</button>
-          <button class="tool-btn" onclick="backspace()">Back</button>
-          <button class="tool-btn clear-btn" onclick="clearAll()">AC</button>
-          <button class="tool-btn" onclick="memoryStore()">MS</button>
-          <button class="tool-btn" onclick="memoryRecall()">MR</button>
-        </div>
-
-        <div class="main-grid">
-
-          <button class="science-btn" onclick="appendToken('sin(')">sin</button>
-          <button class="science-btn" onclick="appendToken('cos(')">cos</button>
-          <button class="science-btn" onclick="appendToken('tan(')">tan</button>
-          <button class="science-btn" onclick="appendToken('π')">π</button>
-          <button class="operator-btn" onclick="appendToken('÷')">÷</button>
-
-          <button class="science-btn" onclick="appendToken('asin(')">sin⁻¹</button>
-          <button class="science-btn" onclick="appendToken('acos(')">cos⁻¹</button>
-          <button class="science-btn" onclick="appendToken('atan(')">tan⁻¹</button>
-          <button class="science-btn" onclick="appendToken('ℯ')">e</button>
-          <button class="operator-btn" onclick="appendToken('×')">×</button>
-
-          <button class="science-btn" onclick="appendToken('^2')">x²</button>
-          <button class="science-btn" onclick="appendToken('^3')">x³</button>
-          <button class="science-btn" onclick="appendToken('sqrt(')">√</button>
-          <button class="science-btn" onclick="appendToken('log(')">log</button>
-          <button class="operator-btn" onclick="appendToken('−')">−</button>
-
-          <button class="number-btn" onclick="appendToken('7')">7</button>
-          <button class="number-btn" onclick="appendToken('8')">8</button>
-          <button class="number-btn" onclick="appendToken('9')">9</button>
-          <button class="science-btn" onclick="appendToken('ln(')">ln</button>
-          <button class="operator-btn" onclick="appendToken('+')">+</button>
-
-          <button class="number-btn" onclick="appendToken('4')">4</button>
-          <button class="number-btn" onclick="appendToken('5')">5</button>
-          <button class="number-btn" onclick="appendToken('6')">6</button>
-          <button class="science-btn" onclick="appendToken('(')">(</button>
-          <button class="equal-btn" onclick="calculate()">=</button>
-
-          <button class="number-btn" onclick="appendToken('1')">1</button>
-          <button class="number-btn" onclick="appendToken('2')">2</button>
-          <button class="number-btn" onclick="appendToken('3')">3</button>
-          <button class="science-btn" onclick="appendToken(')')">)</button>
-          <button class="science-btn" onclick="applyPercent()">%</button>
-
-          <button class="number-btn zero-btn" onclick="appendToken('0')">0</button>
-          <button class="number-btn" onclick="appendToken('.')">.</button>
-          <button class="science-btn" onclick="toggleSign()">±</button>
-          <button class="science-btn" onclick="appendToken('^')">xʸ</button>
-
-        </div>
-
-        <div class="note">
-          Operators are grouped on the right side: ÷ × − + =
+        <div class="social-item">
+          <a class="social-link instagram"
+             href="https://www.instagram.com/newsonsportec/"
+             target="_blank"
+             rel="noopener noreferrer"
+             aria-label="Newson Sportec Instagram">
+            ◎
+          </a>
+          <span class="social-name">Instagram</span>
         </div>
 
       </div>
-    </div>
+    </section>
+
   </div>
 
   <script>
