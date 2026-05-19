@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <title>Newson Sportec Scientific Calculator</title>
 
   <style>
@@ -13,10 +14,10 @@
     body {
       margin: 0;
       min-height: 100vh;
+      background: #050505;
       display: flex;
       justify-content: center;
       align-items: center;
-      background: #111;
       font-family: Arial, Helvetica, sans-serif;
     }
 
@@ -31,38 +32,40 @@
       overflow: hidden;
     }
 
-    /* Main calculator position on the poster */
+    /*
+      Calculator position on your poster.
+      Change top if you need to move it lower or higher.
+    */
     .calculator-area {
       position: absolute;
       left: 7.7%;
-      top: 39.0%;
-      width: 60.5%;
-      height: 45.6%;
-      background: rgba(250, 250, 252, 0.98);
-      border: 4px solid rgba(255, 255, 255, 0.95);
+      top: 39.2%;
+      width: 60.8%;
+      height: 45.2%;
+      background: #ffffff;
+      border: 4px solid #f2f2f2;
       border-radius: 26px;
       padding: 10px;
       box-shadow:
-        0 12px 30px rgba(0, 0, 0, 0.45),
-        inset 0 0 0 1px rgba(255, 255, 255, 0.8);
+        0 12px 30px rgba(0, 0, 0, 0.48),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.9);
       z-index: 5;
     }
 
     .calculator-shell {
       width: 100%;
       height: 100%;
+      background: linear-gradient(180deg, #24272f 0%, #111318 100%);
       border-radius: 20px;
-      background: linear-gradient(180deg, #25282f 0%, #14161b 100%);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      box-shadow:
-        inset 0 0 18px rgba(255, 255, 255, 0.03),
-        0 8px 18px rgba(0, 0, 0, 0.35);
-      padding: 12px;
+      padding: 13px;
+      color: #ffffff;
       display: flex;
       flex-direction: column;
-      gap: 8px;
-      color: white;
-      min-height: 0;
+      gap: 9px;
+      overflow: hidden;
+      box-shadow:
+        inset 0 0 18px rgba(255, 255, 255, 0.04),
+        0 6px 16px rgba(0, 0, 0, 0.35);
     }
 
     .calc-header {
@@ -70,13 +73,13 @@
       justify-content: space-between;
       align-items: center;
       gap: 10px;
-      flex-wrap: wrap;
+      flex: 0 0 auto;
     }
 
     .brand-wrap {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 9px;
       min-width: 0;
     }
 
@@ -85,8 +88,8 @@
       height: 0;
       border-top: 12px solid transparent;
       border-bottom: 12px solid transparent;
-      border-left: 16px solid #f36a21;
-      transform: skewX(-12deg);
+      border-left: 18px solid #f15a18;
+      transform: skewX(-10deg);
       flex-shrink: 0;
     }
 
@@ -95,38 +98,31 @@
       min-width: 0;
     }
 
-    .brand-text .title {
-      font-size: clamp(14px, 1.8vw, 28px);
+    .brand-title {
+      font-size: clamp(13px, 1.8vw, 25px);
       font-weight: 900;
-      letter-spacing: 1px;
       font-style: italic;
+      letter-spacing: 1px;
       white-space: nowrap;
     }
 
-    .brand-text .subtitle {
-      font-size: clamp(10px, 1vw, 14px);
-      color: #f36a21;
-      font-weight: 700;
-      letter-spacing: 0.5px;
+    .brand-subtitle {
+      color: #f15a18;
+      font-size: clamp(9px, 1vw, 14px);
+      font-weight: 800;
       margin-top: 4px;
-      white-space: nowrap;
-    }
-
-    .brand-text .caption {
-      font-size: clamp(9px, 0.95vw, 13px);
-      color: #c8c8c8;
-      margin-top: 4px;
+      letter-spacing: 0.6px;
       white-space: nowrap;
     }
 
     .mode-toggle {
       display: flex;
       align-items: center;
-      gap: 10px;
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(255, 255, 255, 0.12);
       border-radius: 14px;
-      padding: 6px 10px;
+      padding: 6px 9px;
       flex-shrink: 0;
     }
 
@@ -134,22 +130,22 @@
       display: flex;
       align-items: center;
       gap: 4px;
-      font-size: clamp(11px, 1vw, 14px);
+      font-size: clamp(10px, 1vw, 14px);
+      font-weight: 700;
       cursor: pointer;
-      color: #f5f5f5;
     }
 
-    .mode-toggle input[type="radio"] {
-      accent-color: #f36a21;
-      cursor: pointer;
+    .mode-toggle input {
+      accent-color: #f15a18;
     }
 
     .display-panel {
-      background: linear-gradient(180deg, #111318 0%, #0c0d11 100%);
-      border: 1px solid rgba(255, 255, 255, 0.10);
+      background: linear-gradient(180deg, #101217 0%, #090a0d 100%);
+      border: 1px solid rgba(255, 255, 255, 0.13);
       border-radius: 16px;
       padding: 10px 12px;
-      min-height: 100px;
+      flex: 0 0 auto;
+      min-height: 94px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -157,140 +153,149 @@
     }
 
     .screen-label {
-      font-size: clamp(10px, 0.95vw, 13px);
-      color: #d0d0d0;
+      font-size: clamp(9px, 0.95vw, 13px);
+      color: #d6d6d6;
       letter-spacing: 1px;
+      font-weight: 700;
     }
 
     .expression-screen {
-      font-size: clamp(12px, 1.1vw, 16px);
-      color: #d5d5d5;
+      min-height: 20px;
+      color: #cfcfcf;
       text-align: right;
-      min-height: 22px;
-      word-wrap: break-word;
+      font-size: clamp(11px, 1vw, 15px);
       overflow-wrap: anywhere;
-      margin-top: 4px;
     }
 
     .result-screen {
-      font-size: clamp(28px, 4vw, 56px);
-      font-weight: 900;
+      color: #ffffff;
       text-align: right;
-      color: white;
-      min-height: 44px;
-      word-wrap: break-word;
+      font-size: clamp(26px, 4vw, 55px);
+      font-weight: 900;
       overflow-wrap: anywhere;
     }
 
-    .mini-tools {
+    .top-tools {
       display: grid;
-      grid-template-columns: repeat(7, 1fr);
-      gap: 6px;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 7px;
+      flex: 0 0 auto;
     }
 
-    .button-grid {
+    /*
+      Main calculator grid:
+      5 columns.
+      The last column is only for operators:
+      ÷
+      ×
+      −
+      +
+      =
+    */
+    .main-grid {
       flex: 1 1 auto;
       min-height: 0;
       display: grid;
-      grid-template-columns: repeat(8, 1fr);
-      grid-auto-rows: minmax(0, 1fr);
-      gap: 6px;
+      grid-template-columns: repeat(5, 1fr);
+      grid-template-rows: repeat(6, 1fr);
+      gap: 7px;
     }
 
     button {
       border: none;
       border-radius: 12px;
       cursor: pointer;
-      color: #f7f7f7;
-      font-weight: 800;
-      font-size: clamp(11px, 1.2vw, 20px);
-      background: linear-gradient(180deg, #2f3440 0%, #1b1f28 100%);
-      box-shadow:
-        inset 0 1px 1px rgba(255, 255, 255, 0.08),
-        0 3px 6px rgba(0, 0, 0, 0.28);
-      transition: transform 0.12s ease, filter 0.12s ease;
-      min-height: 38px;
+      color: #ffffff;
+      font-weight: 900;
+      font-size: clamp(13px, 1.55vw, 25px);
+      min-height: 42px;
       padding: 0 4px;
+      background: linear-gradient(180deg, #343a46 0%, #1f2530 100%);
+      box-shadow:
+        inset 0 1px 1px rgba(255, 255, 255, 0.10),
+        0 3px 7px rgba(0, 0, 0, 0.34);
+      transition: 0.12s ease;
     }
 
     button:hover {
       transform: translateY(-1px);
-      filter: brightness(1.08);
+      filter: brightness(1.1);
     }
 
     button:active {
       transform: scale(0.97);
     }
 
-    .mini-btn {
-      background: linear-gradient(180deg, #3a404d 0%, #242933 100%);
-      font-size: clamp(10px, 1vw, 14px);
-      min-height: 34px;
+    .tool-btn {
+      background: linear-gradient(180deg, #4d5a70 0%, #303b4d 100%);
+      font-size: clamp(11px, 1.2vw, 18px);
     }
 
-    .scientific-btn {
-      background: linear-gradient(180deg, #363d4a 0%, #212732 100%);
-      color: #e5e5e5;
+    .science-btn {
+      background: linear-gradient(180deg, #333946 0%, #202633 100%);
+      color: #f2f2f2;
+      font-size: clamp(12px, 1.35vw, 22px);
     }
 
     .number-btn {
-      background: linear-gradient(180deg, #434c5d 0%, #2e3746 100%);
+      background: linear-gradient(180deg, #485266 0%, #303a4d 100%);
       color: #ffffff;
+      font-size: clamp(16px, 1.9vw, 30px);
     }
 
     .operator-btn {
-      background: linear-gradient(180deg, #ff7a32 0%, #e25510 100%);
-      color: white;
-    }
-
-    .action-btn {
-      background: linear-gradient(180deg, #53637c 0%, #38475d 100%);
-      color: white;
+      background: linear-gradient(180deg, #ff742d 0%, #e54c0d 100%);
+      color: #ffffff;
+      font-size: clamp(18px, 2.3vw, 36px);
     }
 
     .equal-btn {
-      grid-column: span 8;
-      background: linear-gradient(180deg, #ff7d35 0%, #df4c0b 100%);
-      color: white;
-      font-size: clamp(16px, 1.6vw, 24px);
-      min-height: 42px;
-      letter-spacing: 1px;
+      background: linear-gradient(180deg, #ff8a3d 0%, #df4a0b 100%);
+      color: #ffffff;
+      font-size: clamp(18px, 2.3vw, 36px);
     }
 
-    .helper-note {
-      font-size: clamp(8px, 0.8vw, 11px);
-      color: #c8c8c8;
+    .clear-btn {
+      background: linear-gradient(180deg, #707f98 0%, #3f5068 100%);
+    }
+
+    .zero-btn {
+      grid-column: span 2;
+    }
+
+    .note {
+      flex: 0 0 auto;
       text-align: center;
-      margin-top: 1px;
+      color: #cfcfcf;
+      font-size: clamp(8px, 0.8vw, 11px);
+      line-height: 1.2;
     }
 
     @media (max-width: 900px) {
       .calculator-area {
         padding: 8px;
-        border-radius: 18px;
+        border-radius: 19px;
       }
 
       .calculator-shell {
-        padding: 8px;
-        border-radius: 14px;
+        padding: 9px;
+        border-radius: 15px;
+        gap: 6px;
       }
 
       .display-panel {
-        min-height: 78px;
+        min-height: 75px;
+        padding: 8px;
       }
 
-      .result-screen {
-        font-size: clamp(20px, 3.5vw, 38px);
-      }
-
-      .mini-tools,
-      .button-grid {
+      .top-tools,
+      .main-grid {
         gap: 5px;
       }
 
       button {
         border-radius: 9px;
-        min-height: 30px;
+        min-height: 31px;
       }
     }
 
@@ -305,34 +310,31 @@
 
       .calculator-area {
         left: 7.7%;
-        top: 39.0%;
-        width: 60.5%;
-        height: 45.6%;
+        top: 39.2%;
+        width: 60.8%;
+        height: 45.2%;
       }
 
-      .mini-tools {
-        grid-template-columns: repeat(4, 1fr);
+      .brand-title {
+        font-size: 10px;
       }
 
-      .button-grid {
-        grid-template-columns: repeat(4, 1fr);
-      }
-
-      .equal-btn {
-        grid-column: span 4;
+      .brand-subtitle {
+        font-size: 8px;
       }
 
       .mode-toggle {
-        width: 100%;
-        justify-content: center;
+        padding: 4px 5px;
+        gap: 4px;
       }
 
-      .display-panel {
-        min-height: 70px;
+      .mode-toggle label {
+        font-size: 8px;
       }
     }
   </style>
 </head>
+
 <body>
 
   <div class="poster-wrapper">
@@ -342,11 +344,9 @@
         <div class="calc-header">
           <div class="brand-wrap">
             <div class="brand-icon"></div>
-
             <div class="brand-text">
-              <div class="title">NEWSON SPORTEC</div>
-              <div class="subtitle">Scientific Calculator</div>
-              <div class="caption">Original custom layout for your website</div>
+              <div class="brand-title">NEWSON SPORTEC</div>
+              <div class="brand-subtitle">SCIENTIFIC CALCULATOR</div>
             </div>
           </div>
 
@@ -355,7 +355,6 @@
               <input type="radio" name="angleMode" value="deg" checked />
               Deg
             </label>
-
             <label>
               <input type="radio" name="angleMode" value="rad" />
               Rad
@@ -364,78 +363,73 @@
         </div>
 
         <div class="display-panel">
-          <div class="screen-label">EXPRESSION</div>
+          <div class="screen-label">RESULT</div>
           <div id="expression" class="expression-screen">0</div>
           <div id="result" class="result-screen">0</div>
         </div>
 
-        <div class="mini-tools">
-          <button class="mini-btn action-btn" onclick="useAnswer()">Ans</button>
-          <button class="mini-btn action-btn" onclick="backspace()">Back</button>
-          <button class="mini-btn action-btn" onclick="clearAll()">AC</button>
-          <button class="mini-btn action-btn" onclick="memoryRecall()">MR</button>
-          <button class="mini-btn action-btn" onclick="memoryStore()">MS</button>
-          <button class="mini-btn action-btn" onclick="memoryAdd()">M+</button>
-          <button class="mini-btn action-btn" onclick="memorySubtract()">M-</button>
+        <div class="top-tools">
+          <button class="tool-btn" onclick="useAnswer()">Ans</button>
+          <button class="tool-btn" onclick="backspace()">Back</button>
+          <button class="tool-btn clear-btn" onclick="clearAll()">AC</button>
+          <button class="tool-btn" onclick="memoryStore()">MS</button>
+          <button class="tool-btn" onclick="memoryRecall()">MR</button>
         </div>
 
-        <div class="button-grid">
+        <div class="main-grid">
+
           <!-- Row 1 -->
-          <button class="scientific-btn" onclick="appendToken('sin(')">sin</button>
-          <button class="scientific-btn" onclick="appendToken('cos(')">cos</button>
-          <button class="scientific-btn" onclick="appendToken('tan(')">tan</button>
-          <button class="scientific-btn" onclick="appendToken('asin(')">sin<sup>-1</sup></button>
-          <button class="scientific-btn" onclick="appendToken('acos(')">cos<sup>-1</sup></button>
-          <button class="scientific-btn" onclick="appendToken('atan(')">tan<sup>-1</sup></button>
-          <button class="scientific-btn" onclick="appendToken('(')">(</button>
-          <button class="scientific-btn" onclick="appendToken(')')">)</button>
+          <button class="science-btn" onclick="appendToken('sin(')">sin</button>
+          <button class="science-btn" onclick="appendToken('cos(')">cos</button>
+          <button class="science-btn" onclick="appendToken('tan(')">tan</button>
+          <button class="science-btn" onclick="appendToken('π')">π</button>
+          <button class="operator-btn" onclick="appendToken('÷')">÷</button>
 
           <!-- Row 2 -->
-          <button class="scientific-btn" onclick="appendToken('^')">x<sup>y</sup></button>
-          <button class="scientific-btn" onclick="appendToken('^2')">x<sup>2</sup></button>
-          <button class="scientific-btn" onclick="appendToken('^3')">x<sup>3</sup></button>
-          <button class="scientific-btn" onclick="appendToken('sqrt(')">√x</button>
-          <button class="scientific-btn" onclick="appendToken('cbrt(')">³√x</button>
-          <button class="scientific-btn" onclick="appendToken('root(')">y√x</button>
-          <button class="scientific-btn" onclick="appendToken('recip(')">1/x</button>
-          <button class="scientific-btn" onclick="applyPercent()">%</button>
+          <button class="science-btn" onclick="appendToken('asin(')">sin⁻¹</button>
+          <button class="science-btn" onclick="appendToken('acos(')">cos⁻¹</button>
+          <button class="science-btn" onclick="appendToken('atan(')">tan⁻¹</button>
+          <button class="science-btn" onclick="appendToken('ℯ')">e</button>
+          <button class="operator-btn" onclick="appendToken('×')">×</button>
 
           <!-- Row 3 -->
-          <button class="scientific-btn" onclick="appendToken('π')">π</button>
-          <button class="scientific-btn" onclick="appendToken('ℯ')">e</button>
-          <button class="scientific-btn" onclick="appendToken('ln(')">ln</button>
-          <button class="scientific-btn" onclick="appendToken('log(')">log</button>
-          <button class="scientific-btn" onclick="appendToken('ℯ^(')">e<sup>x</sup></button>
-          <button class="scientific-btn" onclick="appendToken('10^(')">10<sup>x</sup></button>
-          <button class="scientific-btn" onclick="addScientificNotation()">EXP</button>
-          <button class="scientific-btn" onclick="appendToken('fact(')">n!</button>
+          <button class="science-btn" onclick="appendToken('^2')">x²</button>
+          <button class="science-btn" onclick="appendToken('^3')">x³</button>
+          <button class="science-btn" onclick="appendToken('sqrt(')">√</button>
+          <button class="science-btn" onclick="appendToken('log(')">log</button>
+          <button class="operator-btn" onclick="appendToken('−')">−</button>
 
           <!-- Row 4 -->
           <button class="number-btn" onclick="appendToken('7')">7</button>
           <button class="number-btn" onclick="appendToken('8')">8</button>
           <button class="number-btn" onclick="appendToken('9')">9</button>
-          <button class="operator-btn" onclick="appendToken('÷')">÷</button>
+          <button class="science-btn" onclick="appendToken('ln(')">ln</button>
+          <button class="operator-btn" onclick="appendToken('+')">+</button>
+
+          <!-- Row 5 -->
           <button class="number-btn" onclick="appendToken('4')">4</button>
           <button class="number-btn" onclick="appendToken('5')">5</button>
           <button class="number-btn" onclick="appendToken('6')">6</button>
-          <button class="operator-btn" onclick="appendToken('×')">×</button>
+          <button class="science-btn" onclick="appendToken('(')">(</button>
+          <button class="equal-btn" onclick="calculate()">=</button>
 
-          <!-- Row 5 -->
+          <!-- Row 6 -->
           <button class="number-btn" onclick="appendToken('1')">1</button>
           <button class="number-btn" onclick="appendToken('2')">2</button>
           <button class="number-btn" onclick="appendToken('3')">3</button>
-          <button class="operator-btn" onclick="appendToken('−')">−</button>
-          <button class="number-btn" onclick="appendToken('0')">0</button>
-          <button class="number-btn" onclick="appendToken('.')">.</button>
-          <button class="action-btn" onclick="toggleSign()">±</button>
-          <button class="operator-btn" onclick="appendToken('+')">+</button>
+          <button class="science-btn" onclick="appendToken(')')">)</button>
+          <button class="science-btn" onclick="applyPercent()">%</button>
 
-          <!-- Row 6 -->
-          <button class="equal-btn" onclick="calculate()">= CALCULATE =</button>
+          <!-- Row 7 -->
+          <button class="number-btn zero-btn" onclick="appendToken('0')">0</button>
+          <button class="number-btn" onclick="appendToken('.')">.</button>
+          <button class="science-btn" onclick="toggleSign()">±</button>
+          <button class="science-btn" onclick="appendToken('^')">xʸ</button>
+
         </div>
 
-        <div class="helper-note">
-          Tip: y√x uses root(n,x). Example: root(3,27)
+        <div class="note">
+          Operators are grouped on the right side: ÷ × − + =
         </div>
 
       </div>
@@ -455,14 +449,18 @@
     }
 
     function appendToken(token) {
+      if (expression === "Error") {
+        expression = "";
+      }
+
       expression += token;
       updateDisplay();
     }
 
     function clearAll() {
       expression = "";
-      expressionEl.textContent = "0";
       resultEl.textContent = "0";
+      expressionEl.textContent = "0";
     }
 
     function backspace() {
@@ -472,6 +470,18 @@
 
     function useAnswer() {
       appendToken(String(lastAnswer));
+    }
+
+    function memoryStore() {
+      try {
+        memoryValue = evaluateExpression(expression || String(lastAnswer));
+      } catch {
+        memoryValue = lastAnswer;
+      }
+    }
+
+    function memoryRecall() {
+      appendToken(String(memoryValue));
     }
 
     function toggleSign() {
@@ -492,41 +502,18 @@
       updateDisplay();
     }
 
-    function addScientificNotation() {
-      if (!expression) {
-        expression = "1E";
-      } else {
-        expression += "E";
+    function factorial(n) {
+      if (n < 0 || !Number.isInteger(n)) {
+        throw new Error("Invalid factorial");
       }
-      updateDisplay();
-    }
 
-    function memoryStore() {
-      try {
-        memoryValue = evaluateExpression(expression || String(lastAnswer));
-      } catch {
-        memoryValue = lastAnswer;
+      let result = 1;
+
+      for (let i = 2; i <= n; i++) {
+        result *= i;
       }
-    }
 
-    function memoryRecall() {
-      appendToken(String(memoryValue));
-    }
-
-    function memoryAdd() {
-      try {
-        memoryValue += evaluateExpression(expression || "0");
-      } catch {
-        // do nothing
-      }
-    }
-
-    function memorySubtract() {
-      try {
-        memoryValue -= evaluateExpression(expression || "0");
-      } catch {
-        // do nothing
-      }
+      return result;
     }
 
     function formatNumber(value) {
@@ -541,61 +528,39 @@
       return parseFloat(Number(value).toPrecision(12)).toString();
     }
 
-    function factorial(n) {
-      if (n < 0 || !Number.isInteger(n)) {
-        throw new Error("Factorial only works for whole numbers 0 and above.");
-      }
-
-      let result = 1;
-      for (let i = 2; i <= n; i++) {
-        result *= i;
-      }
-      return result;
-    }
-
     function evaluateExpression(expr) {
       const mode = document.querySelector('input[name="angleMode"]:checked').value;
 
-      const sin = (x) => mode === "deg" ? Math.sin(x * Math.PI / 180) : Math.sin(x);
-      const cos = (x) => mode === "deg" ? Math.cos(x * Math.PI / 180) : Math.cos(x);
-      const tan = (x) => mode === "deg" ? Math.tan(x * Math.PI / 180) : Math.tan(x);
+      const sin = x => mode === "deg" ? Math.sin(x * Math.PI / 180) : Math.sin(x);
+      const cos = x => mode === "deg" ? Math.cos(x * Math.PI / 180) : Math.cos(x);
+      const tan = x => mode === "deg" ? Math.tan(x * Math.PI / 180) : Math.tan(x);
 
-      const asin = (x) => mode === "deg" ? Math.asin(x) * 180 / Math.PI : Math.asin(x);
-      const acos = (x) => mode === "deg" ? Math.acos(x) * 180 / Math.PI : Math.acos(x);
-      const atan = (x) => mode === "deg" ? Math.atan(x) * 180 / Math.PI : Math.atan(x);
+      const asin = x => mode === "deg" ? Math.asin(x) * 180 / Math.PI : Math.asin(x);
+      const acos = x => mode === "deg" ? Math.acos(x) * 180 / Math.PI : Math.acos(x);
+      const atan = x => mode === "deg" ? Math.atan(x) * 180 / Math.PI : Math.atan(x);
 
-      const ln = (x) => Math.log(x);
-      const log = (x) => Math.log10(x);
-      const sqrt = (x) => Math.sqrt(x);
-      const cbrt = (x) => Math.cbrt(x);
-      const root = (n, x) => Math.pow(x, 1 / n);
-      const recip = (x) => 1 / x;
-      const fact = (x) => factorial(x);
+      const ln = x => Math.log(x);
+      const log = x => Math.log10(x);
+      const sqrt = x => Math.sqrt(x);
 
       let jsExpr = expr
-        .replace(/Ans/g, "Ans")
         .replace(/π/g, "PI")
-        .replace(/ℯ/g, "ECONST")
+        .replace(/ℯ/g, "E")
         .replace(/÷/g, "/")
         .replace(/×/g, "*")
         .replace(/−/g, "-")
-        .replace(/\^/g, "**")
-        .replace(/(\d+(\.\d+)?)E([+-]?\d+(\.\d+)?)/g, "($1*10**$3)");
+        .replace(/\^/g, "**");
 
       const result = Function(
         "sin", "cos", "tan",
         "asin", "acos", "atan",
-        "ln", "log",
-        "sqrt", "cbrt", "root",
-        "recip", "fact",
-        "PI", "ECONST", "Ans",
+        "ln", "log", "sqrt",
+        "PI", "E", "Ans",
         `"use strict"; return (${jsExpr});`
       )(
         sin, cos, tan,
         asin, acos, atan,
-        ln, log,
-        sqrt, cbrt, root,
-        recip, fact,
+        ln, log, sqrt,
         Math.PI, Math.E, lastAnswer
       );
 
@@ -614,7 +579,7 @@
         resultEl.textContent = formatNumber(result);
         expression = String(result);
         updateDisplay();
-      } catch (error) {
+      } catch {
         resultEl.textContent = "Error";
         expressionEl.textContent = "Check expression";
         expression = "";
@@ -626,25 +591,43 @@
 
       if (/[0-9]/.test(key)) {
         appendToken(key);
-      } else if (key === "+") {
+      }
+
+      if (key === "+") {
         appendToken("+");
-      } else if (key === "-") {
+      }
+
+      if (key === "-") {
         appendToken("−");
-      } else if (key === "*") {
+      }
+
+      if (key === "*") {
         appendToken("×");
-      } else if (key === "/") {
+      }
+
+      if (key === "/") {
         appendToken("÷");
-      } else if (key === ".") {
+      }
+
+      if (key === ".") {
         appendToken(".");
-      } else if (key === "(" || key === ")") {
+      }
+
+      if (key === "(" || key === ")") {
         appendToken(key);
-      } else if (key === "Enter") {
+      }
+
+      if (key === "Enter") {
         event.preventDefault();
         calculate();
-      } else if (key === "Backspace") {
+      }
+
+      if (key === "Backspace") {
         event.preventDefault();
         backspace();
-      } else if (key === "Escape") {
+      }
+
+      if (key === "Escape") {
         event.preventDefault();
         clearAll();
       }
@@ -652,5 +635,6 @@
 
     updateDisplay();
   </script>
+
 </body>
 </html>
