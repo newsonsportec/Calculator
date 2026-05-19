@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Newson Sportec Calculator</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: #111;
+      font-family: Arial, Helvetica, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    /* Main poster area */
+    .poster-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 900px;
+      aspect-ratio: 4 / 5;
+      background: url("poster.png") no-repeat center center;
+      background-size: contain;
+      background-color: #111;
+      overflow: hidden;
+    }
+
+    /*
+      This blank panel covers the calculator area in the image,
+      and the real HTML calculator is placed inside it.
+      If needed later, adjust: left, top, width, height
+    */
+    .calculator-panel {
+      position: absolute;
+      left: 8.3%;
+      top: 41.5%;
+      width: 48.5%;
+      height: 34.5%;
+      background: linear-gradient(180deg, rgba(20,20,20,0.98), rgba(10,10,10,0.98));
+      border: 2px solid rgba(255,120,20,0.55);
+      border-radius: 18px;
+      box-shadow:
+        0 0 18px rgba(255, 102, 0, 0.25),
+        inset 0 0 10px rgba(255,255,255,0.05);
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      color: white;
+    }
+
+    .calc-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      gap: 10px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 0;
+    }
+
+    .brand-logo {
+      width: 34px;
+      height: 26px;
+      background: linear-gradient(135deg, #ff7a00, #ff4500);
+      clip-path: polygon(0 20%, 70% 0, 100% 20%, 55% 100%, 40% 60%, 10% 95%);
+      flex-shrink: 0;
+    }
+
+    .brand-text {
+      line-height: 1;
+    }
+
+    .brand-text .top {
+      font-size: 17px;
+      font-weight: 800;
+      color: #ffffff;
+      letter-spacing: 0.5px;
+    }
+
+    .brand-text .bottom {
+      font-size: 12px;
+      font-weight: 800;
+      color: #ff6a00;
+      letter-spacing: 0.5px;
+    }
+
+    .top-icons {
+      display: flex;
+      gap: 10px;
+      font-size: 18px;
+      color: #ddd;
+    }
+
+    .display-box {
+      background: #1a1a1a;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px;
+      padding: 12px;
+      margin-bottom: 12px;
+      box-shadow: inset 0 0 10px rgba(255,255,255,0.03);
+    }
+
+    .display-label {
+      font-size: 12px;
+      color: #cfcfcf;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+    }
+
+    #display {
+      width: 100%;
+      background: transparent;
+      border: none;
+      outline: none;
+      color: white;
+      text-align: right;
+      font-size: 34px;
+      font-weight: 700;
+    }
+
+    .memory-row,
+    .button-row {
+      display: grid;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .memory-row {
+      grid-template-columns: repeat(5, 1fr);
+    }
+
+    .button-row {
+      grid-template-columns: repeat(5, 1fr);
+    }
+
+    button {
+      border: none;
+      border-radius: 10px;
+      background: #222;
+      color: white;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      height: 44px;
+      transition: 0.18s ease;
+      box-shadow: inset 0 0 6px rgba(255,255,255,0.03);
+    }
+
+    button:hover {
+      transform: scale(1.03);
+      background: #2e2e2e;
+    }
+
+    .operator {
+      background: linear-gradient(180deg, #ff7b1a, #ff5a00);
+    }
+
+    .operator:hover {
+      background: linear-gradient(180deg, #ff8d35, #ff6b1a);
+    }
+
+    .equal {
+      background: linear-gradient(180deg, #ff7b1a, #ff5a00);
+      grid-column: span 2;
+    }
+
+    .equal:hover {
+      background: linear-gradient(180deg, #ff8d35, #ff6b1a);
+    }
+
+    .zero {
+      grid-column: span 2;
+    }
+
+    .small-note {
+      margin-top: auto;
+      text-align: center;
+      font-size: 12px;
+      color: #ccc;
+      opacity: 0.9;
+    }
+
+    @media (max-width: 900px) {
+      .calculator-panel {
+        padding: 10px;
+      }
+
+      .brand-text .top {
+        font-size: 14px;
+      }
+
+      .brand-text .bottom {
+        font-size: 10px;
+      }
+
+      #display {
+        font-size: 26px;
+      }
+
+      button {
+        height: 38px;
+        font-size: 13px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      body {
+        padding: 8px;
+      }
+
+      .calculator-panel {
+        left: 8.4%;
+        top: 41.8%;
+        width: 48.7%;
+        height: 34.4%;
+        padding: 8px;
+        border-radius: 12px;
+      }
+
+      #display {
+        font-size: 20px;
+      }
+
+      .display-box {
+        padding: 8px;
+        margin-bottom: 8px;
+      }
+
+      button {
+        height: 30px;
+        font-size: 11px;
+        border-radius: 8px;
+      }
+
+      .memory-row,
+      .button-row {
+        gap: 5px;
+        margin-bottom: 5px;
+      }
+
+      .top-icons {
+        font-size: 14px;
+        gap: 6px;
+      }
+
+      .brand-logo {
+        width: 24px;
+        height: 18px;
+      }
+
+      .brand-text .top {
+        font-size: 11px;
+      }
+
+      .brand-text .bottom {
+        font-size: 8px;
+      }
+
+      .small-note {
+        font-size: 9px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="poster-wrapper">
+    <div class="calculator-panel">
+      <div class="calc-top">
+        <div class="brand">
+          <div class="brand-logo"></div>
+          <div class="brand-text">
+            <div class="top">NEWSON</div>
+            <div class="bottom">SPORTEC</div>
+          </div>
+        </div>
+
+        <div class="top-icons">
+          <span title="Clear All">↺</span>
+          <span title="Menu">☰</span>
+        </div>
+      </div>
+
+      <div class="display-box">
+        <div class="display-label">Result</div>
+        <input type="text" id="display" readonly />
+      </div>
+
+      <div class="memory-row">
+        <button onclick="memoryClear()">MC</button>
+        <button onclick="memoryRecall()">MR</button>
+        <button onclick="memoryAdd()">M+</button>
+        <button onclick="memorySubtract()">M-</button>
+        <button onclick="memoryStore()">MS</button>
+      </div>
+
+      <div class="button-row">
+        <button onclick="appendValue('%')">%</button>
+        <button onclick="toggleSign()">+/-</button>
+        <button onclick="appendValue('(')">(</button>
+        <button onclick="appendValue(')')">)</button>
+        <button class="operator" onclick="appendValue('/')">÷</button>
+      </div>
+
+      <div class="button-row">
+        <button onclick="appendValue('7')">7</button>
+        <button onclick="appendValue('8')">8</button>
+        <button onclick="appendValue('9')">9</button>
+        <button onclick="deleteLast()">⌫</button>
+        <button class="operator" onclick="appendValue('*')">×</button>
+      </div>
+
+      <div class="button-row">
+        <button onclick="appendValue('4')">4</button>
+        <button onclick="appendValue('5')">5</button>
+        <button onclick="appendValue('6')">6</button>
+        <button onclick="clearDisplay()">C</button>
+        <button class="operator" onclick="appendValue('-')">−</button>
+      </div>
+
+      <div class="button-row">
+        <button onclick="appendValue('1')">1</button>
+        <button onclick="appendValue('2')">2</button>
+        <button onclick="appendValue('3')">3</button>
+        <button onclick="appendValue('.')">.</button>
+        <button class="operator" onclick="appendValue('+')">+</button>
+      </div>
+
+      <div class="button-row">
+        <button class="zero" onclick="appendValue('0')">0</button>
+        <button onclick="appendValue('00')">00</button>
+        <button class="equal" onclick="calculate()">=</button>
+      </div>
+
+      <div class="small-note">Fast. Accurate. Easy to Use.</div>
+    </div>
+  </div>
+
+  <script>
+    const display = document.getElementById("display");
+    let memoryValue = 0;
+
+    function appendValue(value) {
+      display.value += value;
+    }
+
+    function clearDisplay() {
+      display.value = "";
+    }
+
+    function deleteLast() {
+      display.value = display.value.slice(0, -1);
+    }
+
+    function calculate() {
+      try {
+        let expression = display.value.replace(/%/g, "/100");
+        display.value = eval(expression);
+      } catch {
+        display.value = "Error";
+      }
+    }
+
+    function toggleSign() {
+      if (display.value === "") return;
+
+      if (!isNaN(display.value)) {
+        display.value = String(Number(display.value) * -1);
+      }
+    }
+
+    function memoryClear() {
+      memoryValue = 0;
+    }
+
+    function memoryRecall() {
+      display.value += memoryValue;
+    }
+
+    function memoryStore() {
+      if (display.value !== "" && !isNaN(display.value)) {
+        memoryValue = Number(display.value);
+      }
+    }
+
+    function memoryAdd() {
+      if (display.value !== "" && !isNaN(display.value)) {
+        memoryValue += Number(display.value);
+      }
+    }
+
+    function memorySubtract() {
+      if (display.value !== "" && !isNaN(display.value)) {
+        memoryValue -= Number(display.value);
+      }
+    }
+  </script>
+
+</body>
+</html>
